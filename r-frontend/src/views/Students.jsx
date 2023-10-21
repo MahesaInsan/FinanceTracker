@@ -16,13 +16,14 @@ const Students = () => {
 
   return (
     <div>
-      <p>Test</p>
+      <p className="underline text-red">Test</p>
       {students?.map((student) => (
         <p key={student.id}>
           {student.nim} <span>{student.name}</span>
         </p>
       ))}
     </div>
+    
   );
 };
 
