@@ -7,7 +7,13 @@ export default {
     "./src/**/*.css",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'primaryColor': '#2D4D5D',
+        'secondaryColor': '#8CC7D4',
+        'hoverSecondaryColor' : '#365a68'
+      },
+    },
   },
   plugins: [],
 }

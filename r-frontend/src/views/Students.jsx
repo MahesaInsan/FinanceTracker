@@ -15,7 +15,7 @@ const Students = () => {
   }, []);
 
   return (
-    <div>
+    <div className="h-screen">
       <p className="underline text-red">Test</p>
       {students?.map((student) => (
         <p key={student.id}>
@@ -23,7 +23,7 @@ const Students = () => {
         </p>
       ))}
     </div>
-    
+
   );
 };
 
