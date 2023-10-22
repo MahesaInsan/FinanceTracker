@@ -7,7 +7,7 @@ function App() {
 
   return (
     <BrowserRouter>
-        <div className='app'>
+        <div className='app w-screen'>
           <Routes>
           <Route path='/' element={<Welcome/>}/>
             <Route path='/students' element={<Students/>}/>

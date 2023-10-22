@@ -1,6 +1,5 @@
 import React from 'react';
 import welomeimg from '/welcome-money.png'
-import Welcome from '../../views/Welcome';
 
 export default function Tops() {
     return (

@@ -1,19 +1,19 @@
 import React from 'react'
 
-function TransactionDetailListDashboard({type, disc, color, price}) {
+function TransactionDetailListDashboard({goalLogo, type, disc, color, price}) {
   return (
-    <div className='flex flex-row border-b mb-2 justify-between'>
-        <div>
-            <div>
-                <img src="" alt="" />
+    <div className='flex flex-row border-b-2 pb-2 justify-between'>
+        <div className='flex flex-row gap-4'>
+            <div className='flex items-center'>
+                <img src={goalLogo} alt="" className='h-[75%]'/>
             </div>
             <div>
-                <p className='text-blue-600 text-l'>{type}</p>
-                <p className='text-xl'>{disc}</p>
+                <p className='text-[#3A89A0] text-l font-semibold'>{type}</p>
+                <p className='text-xl font-medium'>{disc}</p>
             </div> 
         </div>
         <div className={color}>
-            <p className='text-xl'>{price}</p>
+            <p className='text-2xl font-medium'>{price}</p>
         </div>
     </div>
   )
