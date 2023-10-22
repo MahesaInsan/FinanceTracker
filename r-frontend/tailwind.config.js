@@ -13,8 +13,12 @@ export default {
         'secondaryColor': '#8CC7D4',
         'hoverSecondaryColor' : '#365a68'
       },
+      fontSize: {
+        customSmall: '8px',
+      }
     },
   },
-  plugins: [],
+  plugins: [require("tw-elements/dist/plugin.cjs")],
+  darkMode: "class"
 }
 
