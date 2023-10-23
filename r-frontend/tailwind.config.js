@@ -7,8 +7,19 @@ export default {
     "./src/**/*.css",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'primaryColor': '#2D4D5D',
+        'secondaryColor': '#8CC7D4',
+        'hoverSecondaryColor' : '#365a68'
+      },
+      fontSize: {
+        customSmall: '8px',
+      }
+    },
   },
   plugins: [],
+  // plugins: [require("tw-elements/dist/plugin.cjs")],
+  // darkMode: "class"
 }
 

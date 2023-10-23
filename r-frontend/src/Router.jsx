@@ -7,6 +7,8 @@ import DefaultLayout from './components/DefaultLayout'
 import GuestLayout from './components/GuestLayout'
 import Dashboard from './views/Dashboard'
 import Students from './views/Students'
+import Expence from './components/expence/Expence';
+import CreateExpences from './components/expence/CreateExpence';
 
 const router = createBrowserRouter([
     {
@@ -44,6 +46,16 @@ const router = createBrowserRouter([
     {
         path:'/students',
         element:<Students/>
+    },
+    {
+      path: '/expences',
+      element: <Expence/>,
+      children:[
+        {
+          path:'/expences/create',
+          element: <CreateExpences/>
+        }
+      ]
     },
     {
         path:'*',
