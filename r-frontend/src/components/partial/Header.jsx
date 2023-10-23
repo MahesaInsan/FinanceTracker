@@ -3,7 +3,7 @@ import React from "react";
 const Header = () => {
   return (
     <>
-      <header className="flex flex-row justify-evenly py-5 bg-primaryColor text-white font-medium text-lg z-10 sticky top-0">
+      <header className="flex flex-row justify-evenly py-5 bg-primaryColor text-white font-medium text-lg z-10 sticky top-0 mb-[4rem] h-[5rem] align-middle items-center">
         <div className="flex">
           <a className="p-3" href="/">FinancialTracker</a>
         </div>

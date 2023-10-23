@@ -8,7 +8,7 @@ import AchievingGoal from '../components/AchievingGoal';
 const Dashboard = () => {
     return (
         <Layout>
-            <div className='flex flex-col w-full pl-[15%] pr-[15%] gap-20 pt-20'>
+            <div className='flex flex-col w-full pl-[15%] pr-[15%] gap-20'>
                 <Statistic />
                 <Goals />
                 <TransactionHistoryDashboard />
