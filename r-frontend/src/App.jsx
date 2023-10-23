@@ -12,7 +12,6 @@ function App() {
   return (
     <BrowserRouter>
       <div className="app h-screen">
-        <Header />
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/students" element={<Students />} />
@@ -21,7 +20,6 @@ function App() {
           <Route path='/income/create' element={<CreateIncome/>}/>
           <Route path='/goal/create' element={<CreateGoal/>}/>
         </Routes>
-        <Footer />
       </div>
     </BrowserRouter>
   );
