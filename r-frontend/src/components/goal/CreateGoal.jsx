@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import goalImg from "../../../public/goal/goal.png";
+import Layout from "../../layouts/Layout";
 
 const CreateGoal = () => {
   return (
-    <>
+    <Layout>
       <div className="container mx-auto flex flex-row justify-center gap-x-5 my-5">
         <a
           className="hover:underline hover:underline-offset-8 hover:text-secondaryColor hover:font-semibold"
@@ -147,7 +148,7 @@ const CreateGoal = () => {
           </figcaption>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
 

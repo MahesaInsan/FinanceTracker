@@ -6,10 +6,11 @@ import React from "react";
 //   faPencil,
 // } from "@fortawesome/free-solid-svg-icons";
 import expenceImg from "../../../public/expence/expence.png";
+import Layout from "../../layouts/Layout";
 
 const CreateExpences = () => {
   return (
-    <>
+    <Layout>
     <div className="container mx-auto flex flex-row justify-center gap-x-5 my-5">
       <a
         className="underline underline-offset-8 text-secondaryColor font-semibold
@@ -124,7 +125,7 @@ const CreateExpences = () => {
           </figcaption>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
 

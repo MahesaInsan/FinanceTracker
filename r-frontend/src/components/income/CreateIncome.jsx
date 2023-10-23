@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import incomeImg from "../../../public/income/income.png";
+import Layout from "../../layouts/Layout";
 
 const CreateIncome = () => {
   return (
-    <>
+    <Layout >
       <div className="container mx-auto flex flex-row justify-center gap-x-5 my-5">
         <a
           className="hover:underline hover:underline-offset-8 hover:text-secondaryColor hover:font-semibold"
@@ -118,7 +119,7 @@ const CreateIncome = () => {
           </figcaption>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
 
