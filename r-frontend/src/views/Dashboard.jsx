@@ -10,7 +10,7 @@ const Dashboard = () => {
   
   return (
     <Layout>
-      <div className='flex flex-col w-screen pl-[15%] pr-[15%] gap-20'>
+      <div className='flex flex-col w-full pl-[15%] pr-[15%] gap-20 pt-20'>
         <Statistic />
         <Goals />
         <TransactionHistoryDashboard />
