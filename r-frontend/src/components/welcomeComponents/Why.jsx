@@ -17,7 +17,7 @@ export default function Why() {
 
             <div className='flex flex-col gap-10'>
                 <div className='flex flex-row gap-20'>
-                    <div className='flex flex-col h-[14rem] w-[18rem] border-r border-b gap-4 pb-6 pt-8 pl-8 pr-6 shadow-lg'>
+                    <div className='flex flex-col h-[16rem] w-[18rem] border-r border-b gap-4 pb-6 pt-8 pl-8 pr-6 shadow-lg'>
                         <h1 className='text-bold text-xl'>Tracker</h1>
                         <p>
                             The financial tracker can help you create a budget,
@@ -26,7 +26,7 @@ export default function Why() {
                         </p>
                     </div>
 
-                    <div className='flex flex-col h-[14rem] w-[18rem] border-r border-b gap-4 pb-6 pt-8 pl-8 pr-6 shadow-lg'>
+                    <div className='flex flex-col h-[16rem] w-[18rem] border-r border-b gap-4 pb-6 pt-8 pl-8 pr-6 shadow-lg'>
                         <h1 className='text-bold text-xl'>Goal</h1>
                         <p>
                             Financial trackers can also help you achieve your
@@ -37,7 +37,7 @@ export default function Why() {
                 </div>
 
                 <div className='flex flex-row gap-20'>
-                    <div className='flex flex-col h-[14rem] w-[18rem] border-r border-b gap-4 pb-6 pt-8 pl-8 pr-6 shadow-lg'>
+                    <div className='flex flex-col h-[16rem] w-[18rem] border-r border-b gap-4 pb-6 pt-8 pl-8 pr-6 shadow-lg'>
                         <h1 className='text-bold text-xl'>Finance Problem</h1>
                         <p>
                             Financial trackers can also help you avoid financial
@@ -46,7 +46,7 @@ export default function Why() {
                         </p>
                     </div>
 
-                    <div className='flex flex-col h-[14rem] w-[18rem] border-r border-b gap-4 pb-6 pt-8 pl-8 pr-6 shadow-lg'>
+                    <div className='flex flex-col h-[16rem] w-[18rem] border-r border-b gap-4 pb-6 pt-8 pl-8 pr-6 shadow-lg'>
                         <h1 className='text-bold text-xl'>Explore More</h1>
                         <p>
                             Financial trackers can also help you learn about
