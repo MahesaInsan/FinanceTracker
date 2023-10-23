@@ -24,21 +24,21 @@ const Footer = () => {
               Tech Stack Used
             </a>
             <div className="flex flex-row flex-wrap gap-x-5">
-              <button className="p-4 rounded-2xl hover:bg-hoverSecondaryColor border-2 border-sky-300">
+              <button className="p-4 rounded-2xl hover:bg-hoverSecondaryColor border-2 border-sky-300 w-[9rem] h-[4rem]">
                 <div className="flex flex-row gap-x-4  items-center">
-                  <img src={laravel} alt="" className="h-10" />
+                  <img src={laravel} alt="" className="h-6" />
                   <a href="#">Laravel</a>
                 </div>
               </button>
-              <button className="p-4 rounded-2xl hover:bg-hoverSecondaryColor border-2 border-sky-300">
+              <button className="p-4 rounded-2xl hover:bg-hoverSecondaryColor border-2 border-sky-300 w-[9rem] h-[4rem]">
                 <div className="flex flex-row gap-x-4  items-center">
-                  <img src={reactJS} alt="" className="h-10" />
+                  <img src={reactJS} alt="" className="h-6" />
                   <a href="#">React Js</a>
                 </div>
               </button>
-              <button className="p-4 rounded-2xl hover:bg-hoverSecondaryColor border-2 border-sky-300">
+              <button className="p-4 rounded-2xl hover:bg-hoverSecondaryColor border-2 border-sky-300 w-[9rem] h-[4rem]">
                 <div className="flex flex-row gap-x-4  items-center">
-                  <img src={mySQL} alt="" className="h-10" />
+                  <img src={mySQL} alt="" className="h-6" />
                   <a href="#">MySQL</a>
                 </div>
               </button>
