@@ -7,6 +7,7 @@ import Footer from "./components/partial/Footer";
 import CreateExpences from "./components/expence/CreateExpence";
 import CreateIncome from "./components/income/CreateIncome";
 import CreateGoal from "./components/goal/CreateGoal";
+import Transaction from "./views/Transaction";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/expences/create" element={<CreateExpences />} />
           <Route path='/income/create' element={<CreateIncome/>}/>
           <Route path='/goal/create' element={<CreateGoal/>}/>
+          <Route path='/transaction' element={<Transaction/>}/>
         </Routes>
       </div>
     </BrowserRouter>
