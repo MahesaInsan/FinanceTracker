@@ -28,8 +28,8 @@ const CreateGoal = () => {
       </div>
       <div className="container mx-auto p-5 grid grid-cols-2 gap-x-20">
         <form>
-        <label class="block mt-5 mb-5">
-            <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
+        <label className="block mt-5 mb-5">
+            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
               {/* <p className="border-2 border-black inline me-2 p-1 rounded text-customSmall font-semibold bg-black text-white">
                 IDR
               </p> */}
@@ -38,13 +38,13 @@ const CreateGoal = () => {
             <input
               type="text"
               name="text"
-              class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+              className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
               placeholder="Goal Name ..."
             />
           </label>
           <div className="flex flex-row justify-between gap-x-5">
-          <label class="block w-1/2">
-            <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
+          <label className="block w-1/2">
+            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
               {/* <FontAwesomeIcon className="me-2 text-xl" icon={faCalendarDays} /> */}
               Start Date
             </span>
@@ -56,8 +56,8 @@ const CreateGoal = () => {
               placeholder="dd/mm/yyyy"
             />
           </label>
-          <label class="block w-1/2">
-            <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
+          <label className="block w-1/2">
+            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
               {/* <FontAwesomeIcon className="me-2 text-xl" icon={faCalendarDays} /> */}
               End Date
             </span>
@@ -85,8 +85,8 @@ const CreateGoal = () => {
               <option value="8">Eight</option>
             </select>
           </label> */}
-          <label class="block mt-5 mb-5">
-            <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
+          <label className="block mt-5 mb-5">
+            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
               {/* <p className="border-2 border-black inline me-2 p-1 rounded text-customSmall font-semibold bg-black text-white">
                 IDR
               </p> */}
@@ -95,12 +95,12 @@ const CreateGoal = () => {
             <input
               type="number"
               name="number"
-              class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+              className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
               placeholder="you@example.com"
             />
           </label>
-          <label class="block my-5">
-            <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
+          <label className="block my-5">
+            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
               {/* <FontAwesomeIcon
                 className="me-2 text-2xl"
                 icon={faMoneyCheckDollar}
@@ -116,15 +116,15 @@ const CreateGoal = () => {
               <option value="8">Eight</option>
             </select>
           </label>
-          <label class="block my-5">
-            <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
+          <label className="block my-5">
+            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
               {/* <FontAwesomeIcon className="text-xl me-2" icon={faPencil} /> */}
               Description
             </span>
             <textarea
               id="message"
               rows="4"
-              class="w-full px-3 py-2 bg-white  border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md sm:text-sm focus:ring-1"
+              className="w-full px-3 py-2 bg-white  border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md sm:text-sm focus:ring-1"
               placeholder="Write your thoughts here..."
             ></textarea>
           </label>
@@ -142,7 +142,7 @@ const CreateGoal = () => {
               Add Your <span className="text-secondaryColor">Goal</span>
             </h2>
             <p className="text-center text-lg">
-              Goals can be your guideline and standard to measure one's progress
+              Goals can be your guideline and standard to measure {`one's`} progress
               and achievements.
             </p>
           </figcaption>
