@@ -6,11 +6,11 @@ import mySQL from "../../../public/footer/mySQL.png";
 const Footer = () => {
   return (
     <>
-      <footer className="bg-primaryColor text-white py-10 text-xl">
+      <footer className="bg-primaryColor text-white py-10 text-sm">
         <div className="flex justify-evenly flex-wrap">
           <div className="flex flex-col gap-y-5">
             <a className="font-medium" href="#">
-              FinanCialTracker
+              FinancialTracker
             </a>
             <p>
               An app that helps you manage your finances efficiently and
@@ -24,19 +24,19 @@ const Footer = () => {
               Tech Stack Used
             </a>
             <div className="flex flex-row flex-wrap gap-x-5">
-              <button className="p-4 rounded-2xl hover:bg-hoverSecondaryColor">
+              <button className="p-4 rounded-2xl hover:bg-hoverSecondaryColor border-2 border-sky-300">
                 <div className="flex flex-row gap-x-4  items-center">
                   <img src={laravel} alt="" className="h-10" />
                   <a href="#">Laravel</a>
                 </div>
               </button>
-              <button className="p-4 rounded-2xl hover:bg-hoverSecondaryColor">
+              <button className="p-4 rounded-2xl hover:bg-hoverSecondaryColor border-2 border-sky-300">
                 <div className="flex flex-row gap-x-4  items-center">
                   <img src={reactJS} alt="" className="h-10" />
                   <a href="#">React Js</a>
                 </div>
               </button>
-              <button className="p-4 rounded-2xl hover:bg-hoverSecondaryColor">
+              <button className="p-4 rounded-2xl hover:bg-hoverSecondaryColor border-2 border-sky-300">
                 <div className="flex flex-row gap-x-4  items-center">
                   <img src={mySQL} alt="" className="h-10" />
                   <a href="#">MySQL</a>
