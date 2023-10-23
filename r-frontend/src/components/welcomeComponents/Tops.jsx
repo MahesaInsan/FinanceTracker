@@ -10,7 +10,7 @@ export default function Tops() {
             </div>
 
             <div className='flex items-center justify-center mr-[4rem]'>
-              <img src={welomeimg} className='w-[70%]'></img>
+              <img src={welomeimg} className='w-[30rem]'></img>
             </div>
 
             <div className='flex flex-col text-center'>
