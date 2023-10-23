@@ -3,7 +3,7 @@ import welomeimg from '/welcome-money.png'
 
 export default function Tops() {
     return (
-        <div className='flex flex-col items-center justify-center gap-4 bg-gradient-to-b from-sky-200 to-white pt-10'>
+        <div className='flex flex-col items-center justify-center gap-4 bg-gradient-to-b from-sky-200 to-white pt-10 mt-[-4rem]'>
             <div className='flex flex-col text-center gap-2'>
                 <h1 className='font-bold text-3xl'>The perfect place to</h1>
                 <h1 className='font-bold text-3xl text-[#3A89A0]'>Track Your Finance</h1>
