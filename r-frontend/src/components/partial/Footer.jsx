@@ -1,7 +1,7 @@
 import React from "react";
-import laravel from "../../../public/footer/laravel.png";
-import reactJS from "../../../public/footer/reactJs.png";
-import mySQL from "../../../public/footer/mySQL.png";
+import laravel from "/footer/laravel.png";
+import reactJS from "/footer/reactJs.png";
+import mySQL from "/footer/mySQL.png";
 
 const Footer = () => {
   return (

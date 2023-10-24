@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import goalImg from "../../../public/goal/goal.png";
+import goalImg from "/goal/goal.png";
 import Layout from "../../layouts/Layout";
 
 const CreateGoal = () => {

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import incomeImg from "../../../public/income/income.png";
+import incomeImg from "/income/income.png";
 import Layout from "../../layouts/Layout";
 
 const CreateIncome = () => {

@@ -5,7 +5,7 @@ import React from "react";
 //   faMoneyCheckDollar,
 //   faPencil,
 // } from "@fortawesome/free-solid-svg-icons";
-import expenceImg from "../../../public/expence/expence.png";
+import expenceImg from "/expence/expence.png";
 import Layout from "../../layouts/Layout";
 
 const CreateExpences = () => {
