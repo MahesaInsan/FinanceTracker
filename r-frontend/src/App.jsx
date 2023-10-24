@@ -15,8 +15,8 @@ function App() {
       <div className="app h-screen">
         <Routes>
           <Route path="/" element={<Welcome />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          {/* <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} /> */}
           <Route path="/students" element={<Students />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/expences/create" element={<CreateExpences />} />
