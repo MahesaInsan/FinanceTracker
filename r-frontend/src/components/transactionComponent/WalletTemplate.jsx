@@ -1,22 +1,22 @@
-const WalletTemplate = ()=>{
+const WalletTemplate = ({name, number, expired})=>{
     return(
-        <div>
+        <div className="w-[20rem] h-[12rem] flex flex-col p-4 justify-between border rounded-2xl bg-violet-300">
             <div>
-                Bank Name
+                {name}
             </div>
             <div>
+                <img src="https://seeklogo.com/images/C/Chip-logo-3C162A3B9B-seeklogo.com.png" alt="" className="h-[2rem]"/>
                 <img src="" alt="" />
-                <img src="" alt="" />
             </div>
             <div>
-                Number
+                {number}
             </div>
-            <div>
+            <div className="flex flex-row justify-between">
                 <div>
-                    Name
+                    Akang Dimas
                 </div>
                 <div>
-                    Expired Date
+                    {expired}
                 </div>
             </div>
         </div>

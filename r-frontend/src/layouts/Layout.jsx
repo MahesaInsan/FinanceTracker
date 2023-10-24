@@ -4,10 +4,10 @@ import Footer from '../components/partial/Footer';
 
 export default function Layout({ children }) {
     return (
-        <html>
+        <div>
             <Header />
             <div>{children}</div>
             <Footer />
-        </html>
+        </div>
     );
 }
