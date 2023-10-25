@@ -8,8 +8,7 @@ const WalletDetail = ()=>{
     useEffect(() => {
         const fetchCards = async () => {
             const response = await axios.get('http://127.0.0.1:8000/cards');
-            console.log(response);
-            setCards(response.data.card);
+            setCards(response.data.cards);
         };
 
         fetchCards();
@@ -19,7 +18,7 @@ const WalletDetail = ()=>{
         <div className="flex flex-col gap-4">
             <div className="flex gap-4">
                 {cards?.map((card) => (
-                    <WalletTemplate key={card.id} number={card.number} name={card.name} expired={card.expired}/>
+                    <WalletTemplate key={card.id} card={card}/>
                 ))}
             </div>
             <div className="flex justify-between border-b border-r p-3 shadow-md">

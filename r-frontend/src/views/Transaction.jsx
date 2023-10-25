@@ -1,6 +1,6 @@
 import Layout from "../layouts/Layout";
 import Wallet from "../components/transactionComponent/Wallet";
-import TransactionDetailDashboard from "../components/TransactionDetailDashboard";
+import TransactionDetailDashboard from "../components/dashboard/TransactionDetailDashboard";
 import TransactionFilter from "../components/transactionComponent/TransactionFilter";
 
 const Transaction = ()=>{

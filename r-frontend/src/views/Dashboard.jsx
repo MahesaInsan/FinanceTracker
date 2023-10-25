@@ -1,9 +1,9 @@
 import React from 'react';
 import Layout from '../layouts/Layout';
-import Statistic from '../components/Statistic';
-import Goals from '../components/Goals';
-import TransactionHistoryDashboard from '../components/TransactionHistoryDashboard';
-import AchievingGoal from '../components/AchievingGoal';
+import Statistic from '../components/dashboard/Statistic';
+import Goals from '../components/dashboard/Goals';
+import TransactionHistoryDashboard from '../components/dashboard/TransactionHistoryDashboard';
+import AchievingGoal from '../components/dashboard/AchievingGoal';
 
 const Dashboard = () => {
     return (
@@ -12,7 +12,6 @@ const Dashboard = () => {
                 <Statistic />
                 <Goals />
                 <TransactionHistoryDashboard />
-                <div>Achieving goal</div>
                 <AchievingGoal />
             </div>
         </Layout>

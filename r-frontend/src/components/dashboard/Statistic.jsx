@@ -14,7 +14,7 @@ const Statistic = () => {
       </div>
       <div className='Graph flex flex-row justify-between'>
         <div className='w-[60%] h-[75%]'>
-          <img src={"../../public/statistic/statisticExample.png"} alt=""/>
+          <img src={"/statistic/statisticExample.png"} alt=""/>
         </div>
         <div className='flex flex-col gap-2 justify-evenly items-center grow'>
           <TotalMoneyBox title={"Current Money"} description={"Rp. 12.350.000"} color={"text-xl font-semibold "}></TotalMoneyBox>
