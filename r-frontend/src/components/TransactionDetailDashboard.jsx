@@ -4,7 +4,7 @@ import TransactionDetailListDashboard from './TransactionDetailListDashboard'
 function TransactionDetailDashboard() {
   return (
     <div className='flex flex-row w-full justify-between border-r border-b shadow-md rounded-lg p-6 px-16'>
-        <div className='flex flex-col w-1/2 justify-center align-center text-2xl gap-4'>
+        <div className='flex flex-col w-1/2 justify-center align-center text-xl gap-4'>
             <div>
                 <p>Tuesday,</p>
                 <p className='font-bold'>27 September 2023</p>

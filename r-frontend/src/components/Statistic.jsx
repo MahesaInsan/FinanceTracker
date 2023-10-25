@@ -17,9 +17,9 @@ const Statistic = () => {
           <img src={"../../public/statistic/statisticExample.png"} alt=""/>
         </div>
         <div className='flex flex-col gap-2 justify-evenly items-center grow'>
-          <TotalMoneyBox title={"Current Money"} description={"Rp. 12.350.000"} color={"text-2xl font-semibold "}></TotalMoneyBox>
-          <TotalMoneyBox title={"Total Income"} description={"Rp. 4.955.000"} color={"text-2xl font-semibold text-[#62C668]"}></TotalMoneyBox>
-          <TotalMoneyBox title={"Total Expense"} description={"Rp. 4.955.000"} color={"text-2xl font-semibold text-[#DF2424]"}></TotalMoneyBox>
+          <TotalMoneyBox title={"Current Money"} description={"Rp. 12.350.000"} color={"text-xl font-semibold "}></TotalMoneyBox>
+          <TotalMoneyBox title={"Total Income"} description={"Rp. 4.955.000"} color={"text-xl font-semibold text-[#62C668]"}></TotalMoneyBox>
+          <TotalMoneyBox title={"Total Expense"} description={"Rp. 4.955.000"} color={"text-xl font-semibold text-[#DF2424]"}></TotalMoneyBox>
         </div>
       </div>
       <div>
