@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
 
-class Card extends Model
+class Goal extends Model
 {
     use HasFactory;
-    
+
     public function transaction(): HasMany{
         return $this->hasMany(Transaction::class);
     }
