@@ -37,7 +37,7 @@ export default function EditProfile() {
                         <BsPerson className='pointer-events-none w-6 h-6 ml-3'></BsPerson>
                         <input
                             type='text'
-                            className='ml-3 h-full w-full outline-none'
+                            className='ml-3 h-full w-[90%] outline-none'
                             placeholder='mahesa'
                         />
                     </div>
@@ -49,7 +49,7 @@ export default function EditProfile() {
                         <AiOutlineMail className='pointer-events-none w-6 h-6 ml-3'></AiOutlineMail>
                         <input
                             type='text'
-                            className='ml-3 h-full w-full outline-none'
+                            className='ml-3 h-full w-[90%] outline-none'
                             placeholder='mahesainsan@gmail.com'
                         />
                     </div>
@@ -61,7 +61,7 @@ export default function EditProfile() {
                         <AiOutlineLock className='pointer-events-none w-6 h-6 ml-3'></AiOutlineLock>
                         <input
                             type='password'
-                            className='ml-3 h-full w-full outline-none'
+                            className='ml-3 h-full w-[90%] outline-none'
                             placeholder='Input password'
                         />
                     </div>
@@ -73,7 +73,7 @@ export default function EditProfile() {
                         <AiOutlineLock className='pointer-events-none w-6 h-6 ml-3'></AiOutlineLock>
                         <input
                             type='password'
-                            className='ml-3 h-full w-fulll outline-none'
+                            className='ml-3 h-full w-[90%] outline-none'
                             placeholder='Confirm password'
                         />
                     </div>

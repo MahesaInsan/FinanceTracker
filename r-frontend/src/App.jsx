@@ -8,7 +8,7 @@ import CreateExpences from "./components/expence/CreateExpence";
 import CreateIncome from "./components/income/CreateIncome";
 import CreateGoal from "./components/goal/CreateGoal";
 import Transaction from "./views/Transaction";
-/* import Profile from "./views/Profile"; */
+import Profile from "./views/Profile";
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
           <Route path="/transaction" element={<Transaction/>} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path='/goal/create' element={<CreateGoal/>}/>
-          {/* <Route path='/profile' element={<Profile/>}/> */}
+          <Route path='/profile' element={<Profile/>}/>
         </Routes>
       </div>
     </BrowserRouter>
