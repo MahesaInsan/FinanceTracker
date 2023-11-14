@@ -9,6 +9,8 @@ import CreateIncome from "./components/income/CreateIncome";
 import CreateGoal from "./components/goal/CreateGoal";
 import Transaction from "./views/Transaction";
 import Profile from "./views/Profile";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
 
 function App() {
   return (
@@ -16,13 +18,13 @@ function App() {
       <div className="app h-screen">
         <Routes>
           <Route path="/" element={<Welcome />} />
-          {/* <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} /> */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/students" element={<Students />} />
-          <Route path="/transaction" element={<Transaction/>} />
+          <Route path="/transaction" element={<Transaction />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path='/goal/create' element={<CreateGoal/>}/>
-          <Route path='/profile' element={<Profile/>}/>
+          <Route path="/goal/create" element={<CreateGoal />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
     </BrowserRouter>
