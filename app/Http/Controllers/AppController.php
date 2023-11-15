@@ -25,7 +25,7 @@ class AppController extends Controller
                 'message' => 'User created successfully'
             ]);
     }
-    
+
     public function login(Request $request){
         if(!Auth::attempt($request->only('email', 'password'))){
             return response([
@@ -39,12 +39,13 @@ class AppController extends Controller
         $cookie = cookie('jwt', $token, 60*2);
 
         return response([
-            "message" => "success authentication"
+            "message" => $token,
+            "cookie" => $cookie
         ])->withCookie($cookie);
     }
 
     public function user()
-    {   
+    {
         return Auth::user();
     }
 
