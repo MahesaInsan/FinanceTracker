@@ -19,10 +19,11 @@ header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Autho
 |
 */
 
-Route::post("/register", [AppController::class, 'register']);
-Route::post("/login", [AppController::class, "login"]);
+Route::post("/register", [App\Http\Controllers\AppController::class, 'register']);
+Route::post("/login", [App\Http\Controllers\AppController::class, "login"]);
 
 Route::middleware('auth:sanctum')->group(function () { // harus udah ada token
-    Route::get("/user", [AppController::class, "user"]);
-    Route::post("/logout", [AppController::class, "logout"]);
+    Route::post('/goals', [App\Http\Controllers\GoalController::class, 'setGoal']);
+    Route::get("/user", [App\Http\Controllers\AppController::class, "user"]);
+    Route::post("/logout", [App\Http\Controllers\AppController::class, "logout"]);
 });

@@ -19,7 +19,8 @@ const Login = () => {
 
   const submit = async (e) => {
     e.preventDefault();
-    await http.get("/sanctum/csrf-cookie");
+    const test = await http.get("/sanctum/csrf-cookie");
+    console.log(test)
     try {
       const login = await http.post("/api/login", {
         email: email,
@@ -28,7 +29,7 @@ const Login = () => {
       setRedirect(true);
       console.log(login);
     } catch (error) {
-      console.log(error.response.status); // This should be 401 if unauthorized
+      console.log(error.response); // This should be 401 if unauthorized
     }
   };
   // if (redirect) {

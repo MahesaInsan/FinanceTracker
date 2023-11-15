@@ -1,11 +1,53 @@
 import React from 'react'
 import goalImg from "/goal/goal.png";
+import { useState } from 'react';
+import axios from 'axios';
+import Cookies from 'js-cookie'
 
 function AddGoal() {
+    const [name, setName] = useState('')
+    const [start, setStart] = useState('')
+    const [end, setEnd] = useState('')
+    const [amount, setAmount] = useState(0)
+    const [desc, setDesc] = useState('')
+
+    /* const http = axios.create({
+        baseURL: "http://127.0.0.1:8000",
+        headers: {
+          "X-Requested-With": "XMLHttpRequest",
+        },
+        withCredentials: true,
+    }); */
+
+    const handleOnClick = async(e)=>{
+        e.preventDefault()
+        /* const goal = {name, desc, start, end, amount} */
+
+        /* const csrf = await http.get("/sanctum/csrf-cookie");
+        console.log(csrf) */
+        try {
+          const response = await axios.post("http://127.0.0.1:8000/api/goals",{
+            name: name,
+            description: desc,
+            amount: amount
+          },{
+            withCredentials: true,
+            headers: {
+                'X-CSRF-TOKEN': Cookies.get('XSRF-TOKEN'),
+                'Content-Type': 'application/json',
+                // Add any other headers if needed
+              },
+          });
+          console.log(response);
+        } catch (error) {
+          console.log(error.response); // This should be 401 if unauthorized
+        }
+    }
+
   return (
     
     <div className="container mx-auto p-5 grid grid-cols-2 gap-x-20">
-        <form>
+        <form onSubmit={handleOnClick}>
             <label className="block mt-5 mb-5">
                 <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
                     {/* <p className="border-2 border-black inline me-2 p-1 rounded text-customSmall font-semibold bg-black text-white">
@@ -18,6 +60,7 @@ function AddGoal() {
                     name="text"
                     className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                     placeholder="Goal Name ..."
+                    onChange={(e)=>setName(e.target.value)} 
                     />
                 </label>
                 <div className="flex flex-row justify-between gap-x-5">
@@ -27,11 +70,12 @@ function AddGoal() {
                         Start Date
                         </span>
                         <input
-                        datepicker
-                        datepicker-autohide
-                        type="date"
-                        class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
-                        placeholder="dd/mm/yyyy"
+                            datepicker
+                            datepicker-autohide
+                            type="date"
+                            className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                            placeholder="dd/mm/yyyy"
+                            onChange={(e)=>setStart(e.target.value)} 
                         />
                     </label>
                     <label className="block w-1/2">
@@ -40,11 +84,12 @@ function AddGoal() {
                         End Date
                         </span>
                         <input
-                        datepicker
-                        datepicker-autohide
-                        type="date"
-                        class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
-                        placeholder="dd/mm/yyyy"
+                            datepicker
+                            datepicker-autohide
+                            type="date"
+                            className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                            placeholder="dd/mm/yyyy"
+                            onChange={(e)=>setEnd(e.target.value)} 
                         />
                     </label>
                 </div>
@@ -74,6 +119,7 @@ function AddGoal() {
                         name="number"
                         className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                         placeholder="you@example.com"
+                        onChange={(e)=>setAmount(e.target.value)} 
                         />
                     </label>
                     <label className="block my-5">
@@ -103,6 +149,7 @@ function AddGoal() {
                         rows="4"
                         className="w-full px-3 py-2 bg-white  border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md sm:text-sm focus:ring-1"
                         placeholder="Write your thoughts here..."
+                        onChange={(e)=>setDesc(e.target.value)} 
                         ></textarea>
                     </label>
                     <button className="p-3 bg-primaryColor hover:bg-hoverSecondaryColor text-white rounded">

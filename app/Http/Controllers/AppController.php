@@ -25,28 +25,26 @@ class AppController extends Controller
                 'message' => 'User created successfully'
             ]);
     }
-
-    public function login(Request $request)
-    {
-        if (!Auth::attempt($request->only('email', 'password'))) {
-            return response()->json([
-                'status' => 401,
-                'message' => 'Invalid login details'
-            ],Response::HTTP_UNAUTHORIZED);
+    
+    public function login(Request $request){
+        if(!Auth::attempt($request->only('email', 'password'))){
+            return response([
+                "message" => "invalid cridential"
+            ], Response::HTTP_UNAUTHORIZED);
         }
 
-            $user = Auth::user();
-            $token = $user->createToken("token")->plainTextToken;
-            $cookie = cookie('jwt', $token, 60 * 48); // 1 day
+        $user = Auth::user();
+        $token = $user->createToken('token')->plainTextToken;
 
-            return response([
-                "message" => $token,
-                "cookie" => $cookie
-            ])->withCookie($cookie);
+        $cookie = cookie('jwt', $token, 60*2);
+
+        return response([
+            "message" => "success authentication"
+        ])->withCookie($cookie);
     }
 
     public function user()
-    {
+    {   
         return Auth::user();
     }
 

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Goal;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreGoalRequest;
 use App\Http\Requests\UpdateGoalRequest;
+use Illuminate\Support\Facades\Auth;
 
 class GoalController extends Controller
 {
@@ -12,6 +14,17 @@ class GoalController extends Controller
         $goals = Goal::all();
         return response()->json([
             'goals' => $goals
+        ]);
+    }
+
+    public function setGoal(Request $request)
+    {
+        // return Auth::user();
+        return response()->json([
+            "user" => Auth::user(),
+            'name' => $request->input("name"),
+            'amount' => $request->input("amount"),
+            'description' => $request->input("description")
         ]);
     }
 
