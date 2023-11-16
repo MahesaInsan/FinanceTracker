@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -40,9 +41,10 @@ class UserController extends Controller
      */
     public function findUser(string $id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         return response()->json([
-            'user' => $user
+            'user' => $user,
+            'message' => 'Successfully get user data'
         ]);
     }
 
@@ -60,8 +62,15 @@ class UserController extends Controller
     public function updateUser(Request $request, string $id)
     {
         $user = User::find($id);
-        $input = $request->all();
-        $user->update($input);
+        if($request->input('password') == 'empty'){
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+        }else{
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $user->password = Hash::make($request->input('password'));
+        }
+        $user->update();
         return response()->json([
             'status' =>200,
             'message' => 'User updated successfully'
