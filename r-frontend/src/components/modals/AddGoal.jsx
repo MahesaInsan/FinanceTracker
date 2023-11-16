@@ -2,43 +2,69 @@ import React from "react";
 import goalImg from "/goal/goal.png";
 import { useState } from "react";
 import axios from "axios";
-// import Cookies from 'js-cookie'
+import Cookies from "universal-cookie";
 
 function AddGoal() {
   const [name, setName] = useState("");
-  const [start, setStart] = useState("");
-  const [end, setEnd] = useState("");
   const [amount, setAmount] = useState(0);
-  const [desc, setDesc] = useState("");
+  const [note, setNote] = useState("");
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [account, setAccount] = useState(null);
 
-  /* const http = axios.create({
-        baseURL: "http://127.0.0.1:8000",
-        headers: {
-          "X-Requested-With": "XMLHttpRequest",
-        },
-        withCredentials: true,
-    }); */
+  const cookie = new Cookies();
+
+  // const http = axios.create({
+  //   baseURL: "http://127.0.0.1:8000",
+  //   headers: {
+  //     "X-Requested-With": "XMLHttpRequest",
+  //   },
+  //   withCredentials: true,
+  // });
+
+  // const handleOnClick = async (e) => {
+  //   console.log("Your jwt token in cookie : " + cookie.get("jwt"));
+  //   e.preventDefault();
+  //   const test = await http.get("/sanctum/csrf-cookie");
+  //   axios.defaults.headers.common["Authorization"] =
+  //     `Bearer ` + cookie.get("jwt");
+  //   console.log(test);
+  //   try {
+  //     const login = await http.post("/api/goals", {
+  //       name: name,
+  //       description: desc,
+  //       amount: amount,
+  //     });
+  //     setRedirect(true);
+  //     console.log(login);
+  //   } catch (error) {
+  //     console.log(error.response);
+  //   }
+  // };
 
   const handleOnClick = async (e) => {
     e.preventDefault();
     /* const goal = {name, desc, start, end, amount} */
 
     /* const csrf = await http.get("/sanctum/csrf-cookie");
-        console.log(csrf) */
+            console.log(csrf) */
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/goals",
         {
           name: name,
-          description: desc,
+          note: note,
           amount: amount,
+          startDate: startDate,
+          endDate: endDate,
+          account: account,
         },
         {
           withCredentials: true,
           headers: {
-            "X-CSRF-TOKEN": Cookies.get("XSRF-TOKEN"),
             "Content-Type": "application/json",
-            // Add any other headers if needed
+            Accept: "application/json",
+            Authorization: "Bearer " + cookie.get("jwt"),
           },
         }
       );
@@ -78,7 +104,7 @@ function AddGoal() {
               type="date"
               className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
               placeholder="dd/mm/yyyy"
-              onChange={(e) => setStart(e.target.value)}
+              onChange={(e) => setStartDate(e.target.value)}
             />
           </label>
           <label className="block w-1/2">
@@ -92,7 +118,7 @@ function AddGoal() {
               type="date"
               className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
               placeholder="dd/mm/yyyy"
-              onChange={(e) => setEnd(e.target.value)}
+              onChange={(e) => setEndDate(e.target.value)}
             />
           </label>
         </div>
@@ -136,10 +162,11 @@ function AddGoal() {
           <select
             data-te-select-init
             className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+            onChange={(e) => setAccount(e.target.value)}
           >
-            <option value="1">One</option>
-            <option value="7">Seven</option>
-            <option value="8">Eight</option>
+            <option value="Bank A">Bank A</option>
+            <option value="Bank b">Bank B</option>
+            <option value="Bank C">Bank C</option>
           </select>
         </label>
         <label className="block my-5">
@@ -152,7 +179,7 @@ function AddGoal() {
             rows="4"
             className="w-full px-3 py-2 bg-white  border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md sm:text-sm focus:ring-1"
             placeholder="Write your thoughts here..."
-            onChange={(e) => setDesc(e.target.value)}
+            onChange={(e) => setNote(e.target.value)}
           ></textarea>
         </label>
         <button className="p-3 bg-primaryColor hover:bg-hoverSecondaryColor text-white rounded">

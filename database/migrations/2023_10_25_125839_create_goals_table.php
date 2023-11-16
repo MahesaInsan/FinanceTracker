@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('goals', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('logo');
-            $table->string('note');
-            $table->double('invested')->default(0);
+            $table->string('logo')->nullable();
+            $table->longText('note');
+            $table->double('invested')->default(0)->nullable();
             $table->double('amount');
-            $table->date('deadline');
+            $table->string('account');
+            $table->date('startDate');
+            $table->date('endDate');
             $table->timestamps();
         });
     }

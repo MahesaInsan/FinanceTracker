@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Goal extends Model
 {
     use HasFactory;
+    public $guarded = ["id"];
 
     public function transaction(): HasMany{
         return $this->hasMany(Transaction::class);

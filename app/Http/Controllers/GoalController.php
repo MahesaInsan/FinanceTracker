@@ -19,12 +19,23 @@ class GoalController extends Controller
 
     public function setGoal(Request $request)
     {
+        Goal::create([
+            'name' => $request->input("name"),
+            'amount' => $request->input("amount"),
+            'note' => $request->input("note"),
+            "startDate" => $request->input("startDate"),
+            "endDate" => $request->input("endDate"),
+            "account" => $request->input("account")
+        ]);
         // return Auth::user();
         return response()->json([
             "user" => Auth::user(),
             'name' => $request->input("name"),
             'amount' => $request->input("amount"),
-            'description' => $request->input("description")
+            'note' => $request->input("note"),
+            "startDate" => $request->input("startDate"),
+            "endDate" => $request->input("endDate"),
+            "account" => $request->input("account")
         ]);
     }
 

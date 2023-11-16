@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
 
 const Login = () => {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [redirect, setRedirect] = useState(false);
+
+  // const cookies = new Cookies(null { path: '/' });
+  const cookies = new Cookies();
 
   const navigate = useNavigate();
 
@@ -19,15 +23,33 @@ const Login = () => {
 
   const submit = async (e) => {
     e.preventDefault();
+
+    // const fetching = await fetch("http://127.0.0.1:8000/api/login", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   credentials: "include",
+    //   body: JSON.stringify({
+    //     email: email,
+    //     password: password,
+    //   }),
+    // });
+
+    // const data = await fetching.json();
+    // console.log(data);
+
     const test = await http.get("/sanctum/csrf-cookie");
-    console.log(test)
+    console.log(test);
     try {
       const login = await http.post("/api/login", {
         email: email,
         password: password,
       });
       setRedirect(true);
-      console.log(login);
+      console.log("your token : " + login.data.message);
+      cookies.set("jwt", login.data.message);
+      console.log("jwt token : " + cookies.get("jwt"));
     } catch (error) {
       console.log(error.response); // This should be 401 if unauthorized
     }
