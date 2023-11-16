@@ -24,7 +24,7 @@ function App() {
           <Route path="/transaction" element={<Transaction />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/goal/create" element={<CreateGoal />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:id" element={<Profile />} />
         </Routes>
       </div>
     </BrowserRouter>
