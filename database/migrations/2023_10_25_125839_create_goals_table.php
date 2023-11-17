@@ -16,12 +16,14 @@ return new class extends Migration
             $table->string('name');
             $table->string('logo')->nullable();
             $table->longText('note');
-            $table->double('invested')->default(0)->nullable();
             $table->double('amount');
-            $table->string('account');
             $table->date('startDate');
             $table->date('endDate');
+            $table->double('invested')->default(0)->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

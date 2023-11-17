@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const [name, setName] = useState(null);
 
-  useEffect(() => {
+  /* useEffect(() => {
     console.log("test");
     (async () => {
       const fetching = await fetch("http://127.0.0.1:8000/api/user", {
@@ -18,7 +18,7 @@ const Header = () => {
       console.log(data);
       setName(data.name);
     })();
-  });
+  }); */
 
   return (
     <>

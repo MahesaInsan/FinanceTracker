@@ -1,8 +1,21 @@
 import React from 'react'
+import { format, differenceInMonths } from 'date-fns';
 
 function GoalRow({goal}) {
-    function numberWithCommas(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    function numberWithCommas(num) {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    function formatDate(date){
+        const newDate = new Date(date)
+        const formattedDate = format(newDate, 'do LLLL yyyy')
+        return formattedDate
+    }
+
+    function checkDeadline(date){
+        const currentDate = new Date();
+        const monthsLeft = differenceInMonths(new Date(date), currentDate);
+        return monthsLeft
     }
 
   return (
@@ -16,13 +29,13 @@ function GoalRow({goal}) {
                     {goal.name}
                 </div>
                 <div className='font-medium text-l'>
-                    10000 / <span className='font-normal text-medium'>Rp. {numberWithCommas(goal.amount)}</span>
+                    Rp. {numberWithCommas(goal.invested)} / <span className='font-normal text-medium'>Rp. {numberWithCommas(goal.amount)}</span>
                 </div>
             </div>
         </div>
         <div className='flex flex-row justify-center gap-4'>
             <div className='flex items-center font-semibold text-2xl'>
-                {Math.round(10000/goal.amount*100)}%
+                {Math.round(goal.invested/goal.amount*100)}%
             </div>
             <div className='flex flex-col text-l justify-center'>
                 <div>left</div>
@@ -31,7 +44,7 @@ function GoalRow({goal}) {
         </div>
         <div className='flex flex-row justify-center gap-4'>
             <div className='flex items-center font-semibold text-2xl'>
-                10
+                {checkDeadline(goal.endDate)}
             </div>
             <div className='flex flex-col text-l justify-center'>
                 <div>months</div>
@@ -43,7 +56,7 @@ function GoalRow({goal}) {
                 Created at
             </div>
             <div className='text-l'>
-                {goal.deadline}
+                {formatDate(goal.created_at)}
             </div>
         </div>
     </div>

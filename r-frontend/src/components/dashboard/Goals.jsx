@@ -1,15 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import GoalRow from './GoalRow'
+import Cookies from "universal-cookie";
 
 function Goals() {
     const [goals, setGoals] = useState([]);
-
+    const cookie = new Cookies();
+    
     useEffect(()=>{
         const fetchGoals = async()=>{
-            const response = await axios.get("http://127.0.0.1:8000/goals")
-            console.log(response)
-            setGoals(response.data.goals)
+            try {
+                const response = await axios.get("http://127.0.0.1:8000/api/goals",{
+                    headers: {
+                        Accept: 'application/json',
+                        Authorization: 'Bearer ' + cookie.get("jwt")
+                    }
+                });
+                console.log("goal", response.data.goals);
+                setGoals(response.data.goals)
+              } catch (error) {
+                console.log(error.response); // This should be 401 if unauthorized
+            }
         }
 
         fetchGoals()

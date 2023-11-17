@@ -47,7 +47,7 @@ function AddGoal() {
     /* const goal = {name, desc, start, end, amount} */
 
     /* const csrf = await http.get("/sanctum/csrf-cookie");
-            console.log(csrf) */
+    console.log(csrf) */
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/goals",
@@ -56,8 +56,7 @@ function AddGoal() {
           note: note,
           amount: amount,
           startDate: startDate,
-          endDate: endDate,
-          account: account,
+          endDate: endDate
         },
         {
           withCredentials: true,

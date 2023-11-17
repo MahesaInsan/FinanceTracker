@@ -11,22 +11,27 @@ use Illuminate\Support\Facades\Auth;
 class GoalController extends Controller
 {
     public function getGoals(){
-        $goals = Goal::all();
+        $user = Auth::user();
+        $goals = Goal::where('user_id', $user->id)->get();
         return response()->json([
             'goals' => $goals
         ]);
     }
 
-    public function setGoal(Request $request)
-    {
-        Goal::create([
-            'name' => $request->input("name"),
-            'amount' => $request->input("amount"),
-            'note' => $request->input("note"),
-            "startDate" => $request->input("startDate"),
-            "endDate" => $request->input("endDate"),
-            "account" => $request->input("account")
-        ]);
+    public function setGoal(Request $request){
+        $user = Auth::user();
+        if($user){
+            Goal::create([
+                'name' => $request->input("name"),
+                'amount' => $request->input("amount"),
+                'note' => $request->input("note"),
+                "startDate" => $request->input("startDate"),
+                "endDate" => $request->input("endDate"),
+                "account" => $request->input("account"),
+                "user_id" => $user->id
+            ]);
+        }
+        
         // return Auth::user();
         return response()->json([
             "user" => Auth::user(),
@@ -34,8 +39,7 @@ class GoalController extends Controller
             'amount' => $request->input("amount"),
             'note' => $request->input("note"),
             "startDate" => $request->input("startDate"),
-            "endDate" => $request->input("endDate"),
-            "account" => $request->input("account")
+            "endDate" => $request->input("endDate")
         ]);
     }
 
