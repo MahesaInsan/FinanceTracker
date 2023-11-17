@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Card;
 use App\Http\Requests\StoreCardRequest;
 use App\Http\Requests\UpdateCardRequest;
+use Illuminate\Http\Request;
 
 class CardController extends Controller
 {
+    public function __construct(protected AppController $user){ }
+
     /**
      * Display a listing of the resource.
      */
@@ -18,6 +21,21 @@ class CardController extends Controller
         ]);
     }
 
+    public function createCard(Request $request)
+    {
+        $user = $this->user->user();
+        if($user){
+            Card::create([
+                'name' => $request->input("name"),
+                'amount' => $request->input("amount"),
+                'note' => $request->input("note"),
+                "startDate" => $request->input("startDate"),
+                "endDate" => $request->input("endDate"),
+                "account" => $request->input("account"),
+                "user_id" => $user->id
+            ]);
+        }
+    }
 
     public function index()
     {
@@ -27,10 +45,7 @@ class CardController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.

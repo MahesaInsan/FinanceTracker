@@ -6,12 +6,13 @@ use App\Models\Goal;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreGoalRequest;
 use App\Http\Requests\UpdateGoalRequest;
-use Illuminate\Support\Facades\Auth;
 
 class GoalController extends Controller
 {
+    public function __construct(protected AppController $user){ }
+
     public function getGoals(){
-        $user = Auth::user();
+        $user = $this->user->user();
         $goals = Goal::where('user_id', $user->id)->get();
         return response()->json([
             'goals' => $goals
@@ -19,7 +20,7 @@ class GoalController extends Controller
     }
 
     public function setGoal(Request $request){
-        $user = Auth::user();
+        $user = $this->user->user();
         if($user){
             Goal::create([
                 'name' => $request->input("name"),
@@ -34,7 +35,7 @@ class GoalController extends Controller
         
         // return Auth::user();
         return response()->json([
-            "user" => Auth::user(),
+            "user" => $this->user->user(),
             'name' => $request->input("name"),
             'amount' => $request->input("amount"),
             'note' => $request->input("note"),

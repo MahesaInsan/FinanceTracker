@@ -19,7 +19,10 @@ return new class extends Migration
             $table->date('expiredDate');
             $table->double('amount');
             $table->string('colour');
+            $table->string('user_id');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
