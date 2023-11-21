@@ -4,6 +4,7 @@ import { AiOutlineMail, AiOutlineLock } from 'react-icons/ai';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import LeftProfile from './LeftProfile';
+import Cookies from 'universal-cookie';
 
 export default function EditProfile() {
     const [validEmail, setValidEmail] = useState(true);
@@ -18,12 +19,18 @@ export default function EditProfile() {
         confirmPassword: ''
     });
     const [passwordMatch, setPasswordMatch] = useState(true);
+    const cookie = new Cookies();
 
     useEffect(() => {
         const fetchUser = async () => {
             try {
                 const response = await axios.get(
-                    `http://127.0.0.1:8000/api/profile/${id}`
+                    `http://127.0.0.1:8000/api/profile`,{
+                        headers:{
+                            Accept: 'application.json',
+                            Authorization: 'Bearer ' + cookie.get("jwt")
+                        }
+                    }
                 );
                 console.log(response);
                 setUser(response.data.user);
@@ -33,7 +40,7 @@ export default function EditProfile() {
         };
 
         fetchUser();
-    }, [id]);
+    }, []);
 
     const handleNameChange = (e) => {
         setUser({
@@ -86,11 +93,19 @@ export default function EditProfile() {
         if (passwords.password === '' && validEmail) {
             try {
                 const response = await axios.put(
-                    `http://127.0.0.1:8000/api/profile/${id}`,
+                    `http://127.0.0.1:8000/api/profile`,
                     {
                         name: user.name,
                         email: user.email,
                         password: 'empty'
+                    },
+                    {
+                        withCredentials: true,
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Accept: 'application/json',
+                            Authorization: 'Bearer ' + cookie.get('jwt'),
+                        },
                     }
                 );
                 console.log(response);
@@ -100,11 +115,19 @@ export default function EditProfile() {
         } else if (passwordMatch && validEmail) {
             try {
                 const response = await axios.put(
-                    `http://127.0.0.1:8000/api/profile/${id}`,
+                    `http://127.0.0.1:8000/api/profile`,
                     {
                         name: user.name,
                         email: user.email,
                         password: user.password
+                    },
+                    {
+                        withCredentials: true,
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Accept: 'application/json',
+                            Authorization: 'Bearer ' + cookie.get('jwt'),
+                        },
                     }
                 );
                 console.log(response);
