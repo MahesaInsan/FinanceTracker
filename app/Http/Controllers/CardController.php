@@ -15,7 +15,8 @@ class CardController extends Controller
      * Display a listing of the resource.
      */
     public function getCards(){
-        $cards = Card::all();
+        $user = $this->user->user();
+        $cards = Card::where('user_id', $user->id)->get();
         return response()->json([
             'cards' => $cards
         ]);

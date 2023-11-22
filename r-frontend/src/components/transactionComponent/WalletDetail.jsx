@@ -1,18 +1,30 @@
 import WalletTemplate from "./WalletTemplate";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import Cookies from "universal-cookie"
 
 const WalletDetail = ()=>{    
     const [cards, setCards] = useState([]);
+    const cookie = new Cookies()
 
-    useEffect(() => {
-        const fetchCards = async () => {
-            const response = await axios.get('http://127.0.0.1:8000/cards');
-            setCards(response.data.cards);
-        };
+    useEffect(()=>{
+        const fetchCards = async()=>{
+            try {
+                const response = await axios.get("http://127.0.0.1:8000/api/cards",{
+                    headers: {
+                        accept: 'application/json',
+                        Authorization: 'Bearer ' + cookie.get("jwt")
+                    }
+                });
+                setCards(response.data.cards)
+              } catch (error) {
+                console.log("failed")
+                console.log(error.response); // This should be 401 if unauthorized
+            }
+        }
 
-        fetchCards();
-    }, []);
+        fetchCards()
+    }, [])
 
     return(
         <div className="flex flex-col gap-4">

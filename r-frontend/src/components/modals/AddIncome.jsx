@@ -1,7 +1,7 @@
 import React from 'react'
 import incomeImg from "/income/income.png";
 
-function AddIncome() {
+function AddIncome({cards}) {
   return (
     <div className="container mx-auto p-5 grid grid-cols-2 gap-x-20">
         <form>
@@ -58,9 +58,9 @@ function AddIncome() {
               data-te-select-init
               className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
             >
-              <option value="1">One</option>
-              <option value="7">Seven</option>
-              <option value="8">Eight</option>
+              {cards.map((card)=>(
+                <option value={card.id}>{card.name}</option>
+              ))}
             </select>
           </label>
           <label className="block my-5">
