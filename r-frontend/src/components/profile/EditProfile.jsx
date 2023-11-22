@@ -3,25 +3,34 @@ import { BsPerson } from 'react-icons/bs';
 import { AiOutlineMail, AiOutlineLock } from 'react-icons/ai';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import LeftProfile from './LeftProfile';
+import Cookies from 'universal-cookie';
 
 export default function EditProfile() {
+    const [validEmail, setValidEmail] = useState(true);
     const [user, setUser] = useState({
         name: '',
         email: '',
-        password: '',
+        password: ''
     });
     const { id } = useParams();
     const [passwords, setPasswords] = useState({
         password: '',
-        confirmPassword: '',
-      });
-      const [passwordMatch, setPasswordMatch] = useState(true);
+        confirmPassword: ''
+    });
+    const [passwordMatch, setPasswordMatch] = useState(true);
+    const cookie = new Cookies();
 
     useEffect(() => {
         const fetchUser = async () => {
             try {
                 const response = await axios.get(
-                    `http://127.0.0.1:8000/api/profile/${id}`
+                    `http://127.0.0.1:8000/api/profile`,{
+                        headers:{
+                            Accept: 'application.json',
+                            Authorization: 'Bearer ' + cookie.get("jwt")
+                        }
+                    }
                 );
                 console.log(response);
                 setUser(response.data.user);
@@ -31,98 +40,107 @@ export default function EditProfile() {
         };
 
         fetchUser();
-    }, [id]);
+    }, []);
 
     const handleNameChange = (e) => {
         setUser({
-          ...user,
-          name: e.target.value,
+            ...user,
+            name: e.target.value
         });
-      };
+    };
 
-      const handleEmailChange = (e) => {
+    const handleEmailChange = (e) => {
         setUser({
-          ...user,
-          email: e.target.value,
+            ...user,
+            email: e.target.value
         });
-      };
+    };
 
-      const handlePasswordChange = (e) => {
+    const handlePasswordChange = (e) => {
         setPasswords({
-          ...passwords,
-          password: e.target.value,
+            ...passwords,
+            password: e.target.value
         });
-      };
-    
-      const handleConfirmPasswordChange = (e) => {
+    };
+
+    const handleConfirmPasswordChange = (e) => {
         setPasswords({
-          ...passwords,
-          confirmPassword: e.target.value,
+            ...passwords,
+            confirmPassword: e.target.value
         });
-      };
+    };
 
-      useEffect(() => {
-        
-      })
+    const passwordMatcher = () => {
+        if (passwords.password !== passwords.confirmPassword) {
+            setPasswordMatch(false);
+        } else if (passwords.password === passwords.confirmPassword) {
+            setPasswordMatch(true);
+        }
+    };
 
-      const handleUpdate = async (e) => {
+    const validateEmail = () => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const isValid = emailRegex.test(user.email);
+        setValidEmail(isValid);
+    };
+
+    const handleUpdate = async (e) => {
         e.preventDefault();
 
-        if(passwords.password === ''){
+        passwordMatcher();
+        validateEmail();
+
+        if (passwords.password === '' && validEmail) {
             try {
-                const response = await axios.put(`http://127.0.0.1:8000/api/profile/${id}`, {
-                    name: user.name,
-                    email: user.email,
-                    password: 'empty',
-                });
+                const response = await axios.put(
+                    `http://127.0.0.1:8000/api/profile`,
+                    {
+                        name: user.name,
+                        email: user.email,
+                        password: 'empty'
+                    },
+                    {
+                        withCredentials: true,
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Accept: 'application/json',
+                            Authorization: 'Bearer ' + cookie.get('jwt'),
+                        },
+                    }
+                );
                 console.log(response);
             } catch (error) {
                 console.error('Error updating user:', error);
             }
-        }else if(passwords.password === passwords.confirmPassword){
-            setPasswordMatch(true);
+        } else if (passwordMatch && validEmail) {
             try {
-                const response = await axios.put(`http://127.0.0.1:8000/api/profile/${id}`, {
-                    name: user.name,
-                    email: user.email,
-                    password: user.password,
-                });
-                console.log(response)
+                const response = await axios.put(
+                    `http://127.0.0.1:8000/api/profile`,
+                    {
+                        name: user.name,
+                        email: user.email,
+                        password: user.password
+                    },
+                    {
+                        withCredentials: true,
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Accept: 'application/json',
+                            Authorization: 'Bearer ' + cookie.get('jwt'),
+                        },
+                    }
+                );
+                console.log(response);
             } catch (error) {
                 console.error('Error updating user:', error);
             }
-        }else if(passwords.password !== passwords.confirmPassword){
-            setPasswordMatch(false);
         }
-      }
+    };
 
     return (
         <div className='flex flex-row justify-center'>
-            <div className='flex flex-col pt-6 pl-[4rem] w-[18rem] justify-center text-center gap-4 align-middle items-center'>
-                <img
-                    src='/profiles/dummyphoto.png'
-                    className='flex rounded-full'
-                ></img>
-                <h1 className='font-semibold text-2xl'>Mahesa</h1>
-                <div className='flex flex-col shadow-xl w-[12rem] h-[6rem] justify-center'>
-                    <h1 className='pt-2 text-lg'>Current Money</h1>
-                    <h1 className='pb-2 text-lg font-semibold'>
-                        Rp 12.345.000
-                    </h1>
-                </div>
-                <div className='flex flex-col shadow-xl w-[12rem] h-[6rem] justify-center'>
-                    <h1 className='pt-2 text-lg'>Total money in</h1>
-                    <h1 className='pb-2 text-lg font-semibold text-[#62C668]'>
-                        Rp 4.950.000
-                    </h1>
-                </div>
-                <div className='flex flex-col shadow-xl w-[12rem] h-[6rem] justify-center'>
-                    <h1 className='pt-2 text-lg'>Total money out</h1>
-                    <h1 className='pb-2 text-lg font-semibold text-[#DF2424]'>
-                        Rp 4.950.000
-                    </h1>
-                </div>
-            </div>
+            <LeftProfile />
+
             <form className='flex flex-col pl-32 gap-4' onSubmit={handleUpdate}>
                 <div className='flex flex-col gap-2'>
                     <h1 className='font-bold'>Full Name</h1>
@@ -131,9 +149,10 @@ export default function EditProfile() {
                         <input
                             type='text'
                             className='ml-3 h-full w-[90%] outline-none'
-                            placeholder='mahesa'
+                            placeholder='Input your full name'
                             value={user.name}
                             onChange={handleNameChange}
+                            required
                         />
                     </div>
                 </div>
@@ -148,9 +167,11 @@ export default function EditProfile() {
                             placeholder='Input email'
                             value={user.email}
                             onChange={handleEmailChange}
+                            required
                         />
                     </div>
                 </div>
+                {!validEmail && <p className='text-red-500'>Please enter a valid email address.</p>}
 
                 <div className='flex flex-col gap-2'>
                     <h1 className='font-bold'>Password</h1>
@@ -179,7 +200,9 @@ export default function EditProfile() {
                         />
                     </div>
                 </div>
-                {!passwordMatch && <p className='text-red-500'>Passwords do not match</p>}
+                {!passwordMatch && (
+                    <p className='text-red-500'>Passwords do not match</p>
+                )}
 
                 <div className='flex flex-col gap-2'>
                     <h1 className='font-bold'>Bio</h1>
@@ -192,7 +215,7 @@ export default function EditProfile() {
                 </div>
                 <button
                     type='submit'
-                    className='p-3 bg-primaryColor hover:bg-hoverSecondaryColor text-white rounded w-[50%]'
+                    className='p-3 bg-primaryColor hover:bg-hoverSecondaryColor text-white rounded w-[50%] ml-[25%]'
                 >
                     Confirm edit
                 </button>
