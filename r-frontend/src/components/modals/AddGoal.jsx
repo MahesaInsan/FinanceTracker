@@ -56,7 +56,7 @@ function AddGoal() {
           note: note,
           amount: amount,
           startDate: startDate,
-          endDate: endDate
+          endDate: endDate,
         },
         {
           withCredentials: true,
