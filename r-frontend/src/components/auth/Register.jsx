@@ -1,9 +1,11 @@
 import React, { PureComponent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
+  const navigate = useNavigate();
 
   const submit = async (e) => {
     e.preventDefault();
@@ -22,6 +24,7 @@ const Register = () => {
 
     const data = await fetching.json();
     console.log(data);
+    return navigate("/login");
   };
 
   return (
