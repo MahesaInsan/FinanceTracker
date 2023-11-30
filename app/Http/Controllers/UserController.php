@@ -42,8 +42,7 @@ class UserController extends Controller
      */
     public function findUser()
     {   
-        $id = $this->user->getUserId();
-        $user = $id;
+        $user = $this->user->user();
         return response()->json([
             'user' => $user,
             'message' => 'Successfully get user data'
@@ -61,16 +60,18 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function updateUser(Request $request, string $id)
+    public function updateUser(Request $request)
     {
-        $user = User::find($id);
+        $user = $this->user->user();
         if($request->input('password') == 'empty'){
             $user->name = $request->input('name');
             $user->email = $request->input('email');
+            $user->bio = $request->input('bio');
         }else{
             $user->name = $request->input('name');
             $user->email = $request->input('email');
             $user->password = Hash::make($request->input('password'));
+            $user->bio = $request->input('bio');
         }
         $user->update();
         return response()->json([
