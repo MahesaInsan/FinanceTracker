@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function __construct(protected AppController $user) { }
     /**
      * Display a listing of the resource.
      */
@@ -39,9 +40,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function findUser(string $id)
-    {
-        $user = User::findOrFail($id);
+    public function findUser()
+    {   
+        $id = $this->user->getUserId();
+        $user = $id;
         return response()->json([
             'user' => $user,
             'message' => 'Successfully get user data'

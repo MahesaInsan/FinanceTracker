@@ -9,10 +9,10 @@ export default function LeftProfile() {
     useEffect(()=>{
         const fetchCards = async()=>{
             try {
-                const response = await axios.get("http://127.0.0.1:8000/api/profile",{
+                const response = await axios.get("http://127.0.0.1:8000/api/cards",{
                     headers: {
                         Accept: 'application/json',
-                        Authorization: 'Bearer' + cookie.get("jwt")
+                        Authorization: 'Bearer ' + cookie.get("jwt")
                     }
                 });
                 console.log("card", response.data.cards);
@@ -27,7 +27,7 @@ export default function LeftProfile() {
 
     const totalBalance = cards.reduce((total, card) => {
         return total + card.amount;
-      }, 0);
+    }, 0);
 
     return (
         <div className='flex flex-col pt-6 pl-[4rem] w-[18rem] justify-center text-center gap-4 align-middle items-center'>

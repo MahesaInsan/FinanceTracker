@@ -24,15 +24,13 @@ export default function EditProfile() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await axios.get(
-                    `http://127.0.0.1:8000/api/profile`,{
-                        headers:{
-                            Accept: 'application.json',
-                            Authorization: 'Bearer ' + cookie.get("jwt")
-                        }
+                const response = await axios.get("http://127.0.0.1:8000/api/profile",{
+                    headers: {
+                        Accept: 'application/json',
+                        Authorization: 'Bearer ' + cookie.get("jwt")
                     }
-                );
-                console.log(response);
+                });
+                console.log("user", response);
                 setUser(response.data.user);
             } catch (error) {
                 console.error('Error fetching user', error);

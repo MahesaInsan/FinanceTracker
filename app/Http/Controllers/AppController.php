@@ -49,6 +49,12 @@ class AppController extends Controller
         return Auth::user();
     }
 
+    public function getUserId()
+    {
+        $user = Auth::user();
+        return $user->id;
+    }
+
     public function logout()
     {
         $cookie = FacadesCookie::forget('jwt');

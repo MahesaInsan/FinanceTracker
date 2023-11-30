@@ -16,12 +16,14 @@ return new class extends Migration
             $table->date("tDate");
             $table->string("note");
             $table->unsignedBigInteger("card_id");
-            $table->unsignedBigInteger("type_id");
+            $table->unsignedBigInteger("transaction_type_id");
+            $table->unsignedBigInteger("user_id");
             $table->unsignedBigInteger("goal_id")->nullable();
             $table->timestamps();
 
+            $table->foreign("user_id")->references("id")->on("users");
             $table->foreign("card_id")->references("id")->on("cards");
-            $table->foreign("type_id")->references("id")->on("transaction_types");
+            $table->foreign("transaction_type_id")->references("id")->on("transaction_types");
             $table->foreign("goal_id")->references("id")->on("goals");
         });
     }
