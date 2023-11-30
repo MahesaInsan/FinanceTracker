@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { BsPerson } from 'react-icons/bs';
 import { AiOutlineMail, AiOutlineLock } from 'react-icons/ai';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 import LeftProfile from './LeftProfile';
 import Cookies from 'universal-cookie';
 
@@ -11,9 +10,9 @@ export default function EditProfile() {
     const [user, setUser] = useState({
         name: '',
         email: '',
-        password: ''
+        password: '',
+        bio: ''
     });
-    const { id } = useParams();
     const [passwords, setPasswords] = useState({
         password: '',
         confirmPassword: ''
@@ -24,14 +23,16 @@ export default function EditProfile() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await axios.get("http://127.0.0.1:8000/api/profile",{
+                const response = await axios.get("http://127.0.0.1:8000/api/user",{
                     headers: {
+                        withCredentials: true,
                         Accept: 'application/json',
-                        Authorization: 'Bearer ' + cookie.get("jwt")
+                        Authorization: 'Bearer ' + cookie.get("jwt"),
+                        cookie: cookie,
                     }
                 });
                 console.log("user", response);
-                setUser(response.data.user);
+                setUser(response.data);
             } catch (error) {
                 console.error('Error fetching user', error);
             }
@@ -68,6 +69,13 @@ export default function EditProfile() {
         });
     };
 
+    const handlBioChange = (e) => {
+        setUser({
+            ...user,
+            bio: e.target.value
+        });
+    };
+
     const passwordMatcher = () => {
         if (passwords.password !== passwords.confirmPassword) {
             setPasswordMatch(false);
@@ -95,7 +103,8 @@ export default function EditProfile() {
                     {
                         name: user.name,
                         email: user.email,
-                        password: 'empty'
+                        password: 'empty',
+                        bio: user.bio
                     },
                     {
                         withCredentials: true,
@@ -117,7 +126,8 @@ export default function EditProfile() {
                     {
                         name: user.name,
                         email: user.email,
-                        password: user.password
+                        password: user.password,
+                        bio: user.bio
                     },
                     {
                         withCredentials: true,
@@ -205,10 +215,11 @@ export default function EditProfile() {
                 <div className='flex flex-col gap-2'>
                     <h1 className='font-bold'>Bio</h1>
                     <textarea
-                        id='message'
                         rows='10'
                         className='block p-2.5 w-full text-sm rounded-lg outline-none border-2 border-[#8CC7D4]'
                         placeholder='Your bio...'
+                        value={user.bio}
+                        onChange={handlBioChange}
                     ></textarea>
                 </div>
                 <button
