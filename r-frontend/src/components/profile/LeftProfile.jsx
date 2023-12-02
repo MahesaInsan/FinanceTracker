@@ -40,7 +40,7 @@ export default function LeftProfile() {
         const fetchIncomeOutcome = async () => {
             try {
                 const response = await axios.get(
-                    'http://127.0.0.1:8000/api/transaction',
+                    'http://127.0.0.1:8000/api/income',
                     {
                         headers: {
                             Accept: 'application/json',
