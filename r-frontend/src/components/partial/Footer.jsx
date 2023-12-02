@@ -46,7 +46,7 @@ const Footer = () => {
             <p className="font-medium">Meet The Developer</p>
             <ul className="flex flex-row gap-x-10 flex-wrap">
               <li><a className="hover:text-secondaryColor hover:underline hover:underline-offset-8" href="#">Dimas Dani Zaini</a></li>
-              <li><a className="hover:text-secondaryColor hover:underline hover:underline-offset-8" href="#">Kenrick Panca Dewanto</a></li>
+              <li><a className="hover:text-secondaryColor hover:underline hover:underline-offset-8" href="https://www.kenrickdewanto.my.id/" target="_blank" rel="noopener noreferrer">Kenrick Panca Dewanto</a></li>
               <li><a className="hover:text-secondaryColor hover:underline hover:underline-offset-8" href="#">Mahesa Insan Raushanfikir</a></li>
             </ul>
           </div>

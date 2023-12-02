@@ -6,15 +6,20 @@ use App\Models\Transaction;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use PhpParser\Node\Stmt\TryCatch;
 
 class TransactionController extends Controller
 {
-    public function __construct(protected AppController $user) { }
+    public function __construct(protected AppController $user)
+    {
+    }
 
-    public function setTransaction(Request $request){
+    public function setTransaction(Request $request)
+    {
         $user = $this->user->user();
-        
-        if($user){
+
+        if ($user) {
             Transaction::create([
                 "tDate" => $request->input("date"),
                 'note' => $request->input("note"),
@@ -62,9 +67,30 @@ class TransactionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Transaction $transaction)
+    public function getTransaction()
     {
-        //
+        $user = $this->user->user();
+        $incomeCount = Transaction::where('user_id', $user->id)
+        ->whereHas('transactionType', function ($query) {
+            $query->where('type', 'income');
+        })->count();
+        $outcomeCount = Transaction::where('user_id', $user->id)
+        ->whereHas('transactionType', function ($query) {
+            $query->where('type', 'outcome');
+        })->count();
+
+        try {
+            return response()->json([
+                'income' => $incomeCount,
+                'outcome' => $outcomeCount
+            ]);
+        } catch (\Exception $e) {
+            // Log the error for debugging purposes
+        Log::error('Error fetching income and outcome: ' . $e->getMessage());
+
+        // Return an error response
+        return response()->json(['error' => 'Internal Server Error'], 500);
+        }
     }
 
     /**
