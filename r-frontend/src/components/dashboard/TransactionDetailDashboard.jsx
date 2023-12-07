@@ -36,7 +36,7 @@ function TransactionDetailDashboard({ data, tDate }) {
         </div>
       </div>
       <div className="w-1/2 flex flex-col gap-4">
-        {formatedTransaction[tDate].map((data, index) => {
+        {formatedTransaction[tDate]?.map((data, index) => {
           return (
             <>
               <TransactionDetailListDashboard

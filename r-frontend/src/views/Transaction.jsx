@@ -1,6 +1,6 @@
 import Layout from "../layouts/Layout";
 import Wallet from "../components/transactionComponent/Wallet";
-import TransactionDetailDashboard from "../components/dashboard/TransactionDetailDashboard";
+import TransactionHistoryDashboard from "../components/dashboard/TransactionHistoryDashboard";
 import TransactionFilter from "../components/transactionComponent/TransactionFilter";
 
 const Transaction = ()=>{
@@ -25,7 +25,7 @@ const Transaction = ()=>{
                     </div>
                     <TransactionFilter/>
                     <div className="flex flex-col gap-2">
-                        <TransactionDetailDashboard/>
+                        <TransactionHistoryDashboard/>
                     </div>
                 </div>
             </div>
