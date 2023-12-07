@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
-    protected $fillable = ['tDate', 'note', 'card_id', 'transaction_type_id', 'user_id', 'goal_id'];
+    protected $guarded = ["id"];
+    // protected $fillable = ['tDate', 'note', 'card_id', 'transaction_type_id', 'user_id', 'goal_id'];
     use HasFactory;
 
     public function card(): BelongsTo{

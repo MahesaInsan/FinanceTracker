@@ -19,11 +19,13 @@ return new class extends Migration
             $table->double('amount');
             $table->date('startDate');
             $table->date('endDate');
+            $table->unsignedBigInteger('card_id');
             $table->double('invested')->default(0)->nullable();
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('card_id')->references('id')->on('cards')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

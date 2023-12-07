@@ -26,13 +26,13 @@ class GoalController extends Controller
                 'name' => $request->input("name"),
                 'amount' => $request->input("amount"),
                 'note' => $request->input("note"),
+                "card_id" => $request->input("account"),
                 "startDate" => $request->input("startDate"),
                 "endDate" => $request->input("endDate"),
-                "account" => $request->input("account"),
                 "user_id" => $user->id
             ]);
         }
-        
+
         // return Auth::user();
         return response()->json([
             "user" => $this->user->user(),

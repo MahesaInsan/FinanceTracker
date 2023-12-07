@@ -21,11 +21,11 @@ class TransactionController extends Controller
 
         if ($user) {
             Transaction::create([
+                'amount' => $request->input("amount"),
                 "tDate" => $request->input("date"),
                 'note' => $request->input("note"),
                 "card_id" => $request->input("account"),
-                /* 'amount' => $request->input("amount"), */
-                "transaction_type_id" => 1,
+                // "transaction_type_id" => "1", // Harus diiisi dulu kalo mau dipake
                 "user_id" => $user->id
             ]);
         }
@@ -35,6 +35,7 @@ class TransactionController extends Controller
             'note' => $request->input("note"),
             "tDate" => $request->input("date"),
             "card_id" => $request->input("account"),
+            'amount' => (int) $request->input("amount"),
             "transaction_types_id" => 1,
             "user_id" => $user->id
         ]);
@@ -62,6 +63,16 @@ class TransactionController extends Controller
     public function store(StoreTransactionRequest $request)
     {
         //
+    }
+
+    public function getTransactions()
+    {
+        $user = $this->user->user();
+        $transaction = Transaction::all();
+
+        return response()->json([
+            "transaction" => $transaction
+        ]);
     }
 
     /**

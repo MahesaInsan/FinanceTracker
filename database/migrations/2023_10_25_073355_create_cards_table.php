@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('number')->unique();
             $table->string('type');
             $table->date('expiredDate');
-            $table->double('amount');
+            $table->double('balance');
             $table->string('colour');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();

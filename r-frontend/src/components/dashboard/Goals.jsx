@@ -16,7 +16,6 @@ function Goals() {
             Authorization: "Bearer " + cookie.get("jwt"),
           },
         });
-        console.log("goal", response.data.goals);
         setGoals(response.data.goals);
       } catch (error) {
         console.log(error.response); // This should be 401 if unauthorized
@@ -40,9 +39,16 @@ function Goals() {
         </div>
       </div>
       <div className="body flex flex-col border-r border-b shadow-lg p-6 gap-6">
-        {goals?.map((goal) => (
-          <GoalRow key={goal.id} goal={goal} />
-        ))}
+        {goals.length !== 0 ? (
+          goals.map((goal) => <GoalRow key={goal.id} goal={goal} />)
+        ) : (
+          <>
+            <div className="flex justify-center flex-col text-center">
+              <p>Looks like you don't have any goals yet!</p>
+              <p>Please add a new one!</p>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

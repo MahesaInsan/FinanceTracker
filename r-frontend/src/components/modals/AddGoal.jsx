@@ -1,53 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import goalImg from "/goal/goal.png";
-import { useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 
-function AddGoal() {
+function AddGoal({ cacrds }) {
   const [name, setName] = useState("");
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(1);
   const [note, setNote] = useState("");
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [account, setAccount] = useState(null);
+  const [cards, setCards] = useState([]);
 
   const cookie = new Cookies();
 
-  // const http = axios.create({
-  //   baseURL: "http://127.0.0.1:8000",
-  //   headers: {
-  //     "X-Requested-With": "XMLHttpRequest",
-  //   },
-  //   withCredentials: true,
-  // });
+  useEffect(() => {
+    const fetchCards = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/api/cards", {
+          headers: {
+            accept: "application/json",
+            Authorization: "Bearer " + cookie.get("jwt"),
+          },
+        });
+        setCards(response.data.cards);
+        console.log("cards : ", cards);
+      } catch (error) {
+        console.log("failed");
+        console.log(error.response);
+      }
+    };
 
-  // const handleOnClick = async (e) => {
-  //   console.log("Your jwt token in cookie : " + cookie.get("jwt"));
-  //   e.preventDefault();
-  //   const test = await http.get("/sanctum/csrf-cookie");
-  //   axios.defaults.headers.common["Authorization"] =
-  //     `Bearer ` + cookie.get("jwt");
-  //   console.log(test);
-  //   try {
-  //     const login = await http.post("/api/goals", {
-  //       name: name,
-  //       description: desc,
-  //       amount: amount,
-  //     });
-  //     setRedirect(true);
-  //     console.log(login);
-  //   } catch (error) {
-  //     console.log(error.response);
-  //   }
-  // };
+    fetchCards();
+  }, []);
 
   const handleOnClick = async (e) => {
     e.preventDefault();
-    /* const goal = {name, desc, start, end, amount} */
-
-    /* const csrf = await http.get("/sanctum/csrf-cookie");
-    console.log(csrf) */
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/goals",
@@ -55,6 +43,7 @@ function AddGoal() {
           name: name,
           note: note,
           amount: amount,
+          account: account,
           startDate: startDate,
           endDate: endDate,
         },
@@ -67,7 +56,7 @@ function AddGoal() {
           },
         }
       );
-      console.log(response);
+      console.log(response.data);
     } catch (error) {
       console.log(error.response); // This should be 401 if unauthorized
     }
@@ -136,7 +125,7 @@ function AddGoal() {
                         </select>
                     </label> */}
         <label className="block mt-5 mb-5">
-          <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
+          <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block font-medium text-slate-700 text-xl">
             {/* <p className="border-2 border-black inline me-2 p-1 rounded text-customSmall font-semibold bg-black text-white">
                             IDR
                         </p> */}
@@ -163,9 +152,11 @@ function AddGoal() {
             className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
             onChange={(e) => setAccount(e.target.value)}
           >
-            <option value="Bank A">Bank A</option>
-            <option value="Bank b">Bank B</option>
-            <option value="Bank C">Bank C</option>
+            {cards.map((card) => (
+              <option value={card.id} key={card.id}>
+                {card.name}
+              </option>
+            ))}
           </select>
         </label>
         <label className="block my-5">
