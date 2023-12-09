@@ -20,6 +20,7 @@ header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Autho
 */
 
 Route::post("/register", [App\Http\Controllers\AppController::class, 'register']);
+Route::post("/check-email", [App\Http\Controllers\AppController::class, 'checkEmail']);
 Route::post("/login", [App\Http\Controllers\AppController::class, "login"]);
 
 Route::middleware('auth:sanctum')->group(function () { // harus udah ada token

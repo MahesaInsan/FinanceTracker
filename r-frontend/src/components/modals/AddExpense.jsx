@@ -13,7 +13,6 @@ const AddExpense = ({ cards }) => {
 
   const handleOnClick = async (e) => {
     e.preventDefault();
-    console.log(date, amount, account, note);
 
     try {
       const response = await axios.post(
@@ -33,7 +32,6 @@ const AddExpense = ({ cards }) => {
           },
         }
       );
-      console.log(response);
     } catch (error) {
       console.log(error.response.data.message);
     }
@@ -97,7 +95,6 @@ const AddExpense = ({ cards }) => {
             data-te-select-init
             className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
             onChange={(e) => {
-              console.log("Selected value:", e.target.value);
               setAccount(e.target.value);
             }}
             value={account}

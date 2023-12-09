@@ -6,7 +6,7 @@ import AddButton from "../components/layoutComponent/AddButton";
 export default function Layout({ children }) {
   return (
     <div>
-      <Header isLoggedIn={false} />
+      <Header />
       <AddButton />
       <div>{children}</div>
       <Footer />

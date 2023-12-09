@@ -55,15 +55,14 @@ function TransactionHistoryDashboard() {
         </div>
         <div className="body flex flex-col gap-8">
           {transaction.length !== 0 ? (
-            Object.keys(formatedTransaction).map((tDate) => {
+            Object.keys(formatedTransaction).map((tDate, index) => {
+              console.log(formatedTransaction);
               return (
-                <div key={tDate}>
-                  <TransactionDetailDashboard
-                    key={tDate}
-                    tDate={tDate}
-                    data={formatedTransaction}
-                  />
-                </div>
+                <TransactionDetailDashboard
+                  key={tDate}
+                  tDate={tDate}
+                  data={formatedTransaction}
+                />
               );
             })
           ) : (

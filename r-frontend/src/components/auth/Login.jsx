@@ -1,51 +1,72 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-// import { Navigate } from "react-router-dom";
+import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import Cookies from "universal-cookie";
+import ShowErrLbl from "../partial/showErrLbl";
+import IsEmpty from "../validator/IsEmpty";
+import IsValidEmail from "../validator/IsValidEmail";
 
 const Login = () => {
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
-  const [redirect, setRedirect] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
+  const [input, setInput] = useState([]);
+  const errLbl = document.querySelector("#errLbl");
+
+  useEffect(() => {
+    if (errMsg) {
+      errLbl.innerHTML = ShowErrLbl(errLbl, errMsg);
+      setErrMsg("");
+    }
+  }, [errMsg]);
 
   const cookies = new Cookies();
   const navigate = useNavigate();
 
-  const http = axios.create({
-    baseURL: "http://127.0.0.1:8000",
-  });
+  const inputHandler = (e) => {
+    const { name, value } = e.target;
+    setInput((values) => ({ ...values, [name]: value }));
+  };
 
-  const submit = async (e) => {
+  const isValidated = () => {
+    // Validate Email
+    const emailEmpty = IsEmpty(input.email, "Email");
+    if (emailEmpty) {
+      setErrMsg(emailEmpty);
+      return false;
+    }
+
+    const emailValid = IsValidEmail(input.email);
+    if (emailValid) {
+      setErrMsg(emailValid);
+      return false;
+    }
+
+    // Validate Password
+    const passwordEmpty = IsEmpty(input.password, "Password");
+    if (passwordEmpty) {
+      setErrMsg(passwordEmpty);
+      return false;
+    }
+    return true;
+  };
+
+  const submitHandler = async (e) => {
     e.preventDefault();
 
-    // const fetching = await fetch("http://127.0.0.1:8000/api/login", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   credentials: "include",
-    //   body: JSON.stringify({
-    //     email: email,
-    //     password: password,
-    //   }),
-    // });
+    const validated = isValidated();
 
-    // const data = await fetching.json();
-    // console.log(data);
-
-    // const test = await http.get("/sanctum/csrf-cookie");
-    // console.log(test);
-    try {
-      const login = await http.post("/api/login", {
-        email: email,
-        password: password,
-      });
-      // setRedirect(true);
-      cookies.set("jwt", login.data.message);
-      navigate("/");
-    } catch (error) {
-      console.log(error.response);
+    if (validated) {
+      try {
+        const login = await axios.post("http://127.0.0.1:8000/api/login", {
+          email: input.email,
+          password: input.password,
+        });
+        cookies.set("jwt", login.data.message);
+        setErrMsg("");
+        navigate("/");
+      } catch (error) {
+        setErrMsg(error.response.data.message);
+      }
     }
   };
 
@@ -53,59 +74,51 @@ const Login = () => {
     <>
       <div className="container mx-auto p-5 flex justify-center items-center h-screen">
         <div className="grid grid-cols-2 gap-x-20 pl-[15%] pr-[15%]">
-          <div className="flex items-wcenter">
+          <div className="flex justify-center items-center">
             <h1 className="text-5xl font-semibold leading-tight">
               <span className="text-secondaryColor">Login</span> <br /> Page
             </h1>
           </div>
-          <form onSubmit={submit}>
-            {/* <label class="block my-5">
-          <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-          <i class="fi fi-br-apps me-1"></i> Category
-          </span>
-          <select
-            data-te-select-init
-            className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
-          >
-            <option selected value="1">Select Category</option>
-            <option value="1">One</option>
-            <option value="7">Seven</option>
-            <option value="8">Eight</option>
-          </select>
-        </label> */}
+          <form onSubmit={submitHandler}>
+            <label id="errLbl"></label>
             <label className="block my-5">
-              <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
-                {/* <p className="border-2 border-black inline me-2 p-1 rounded text-customSmall font-semibold bg-black text-white">
-          IDR
-        </p> */}
+              <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block font-medium text-slate-700 text-xl">
                 Email
               </span>
-              <input
-                type="email"
-                name="email"
-                className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
-                placeholder="Email ..."
-                onChange={(e) => setEmail(e.target.value)}
-              />
+              <div className="flex flex-row border-2 border-[#8CC7D4] rounded-lg items-center  bg-white shadow-sm placeholder-slate-400 focus:outline-none w-full sm:text-sm focus:ring-1">
+                <AiOutlineMail className="pointer-events-none w-6 h-6 ml-3"></AiOutlineMail>
+                <input
+                  type="email"
+                  name="email"
+                  className="outline-none px-3 py-2 bg-white"
+                  placeholder="Email ..."
+                  // onChange={(e) => setEmail(e.target.value)}
+                  onChange={inputHandler}
+                />
+              </div>
             </label>
             <label className="block my-5">
-              <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
-                {/* <p className="border-2 border-black inline me-2 p-1 rounded text-customSmall font-semibold bg-black text-white">
-          IDR
-        </p> */}
+              <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block font-medium text-slate-700 text-xl">
                 Password
               </span>
-              <input
-                type="password"
-                name="password"
-                className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
-                placeholder="Password ..."
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <div className="flex flex-row border-2 border-[#8CC7D4] rounded-lg items-center  bg-white shadow-sm placeholder-slate-400 focus:outline-none w-full sm:text-sm focus:ring-1">
+                <AiOutlineLock className="pointer-events-none w-6 h-6 ml-3"></AiOutlineLock>
+                <input
+                  type="password"
+                  name="password"
+                  className="outline-none px-3 py-2 bg-white"
+                  placeholder="Password ..."
+                  // onChange={(e) => setPassword(e.target.value)}
+                  onChange={inputHandler}
+                />
+              </div>
             </label>
             <div className="privacyAndPolicy my-5">
-              <input type="checkbox" className="defaut:ring-2 me-3" />
-              <label htmlFor="">Remember Me</label>
+              <input
+                type="checkbox"
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+              />
+              <label className="ms-2 text-lg">Remember Me</label>
             </div>
             <button className="p-3 bg-primaryColor hover:bg-hoverSecondaryColor text-white rounded w-full">
               Login

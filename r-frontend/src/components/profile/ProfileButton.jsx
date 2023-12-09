@@ -12,8 +12,8 @@ const ProfileButton = (user) => {
   const navigate = useNavigate();
 
   const logoutHandler = async (e) => {
-    e.preventDefault();
-    console.log(cookie.get("jwt"));
+    // e.preventDefault();
+    console.log("hello???");
     try {
       // ! unauthorized when using the axios method
       // const response = await axios.post("http://127.0.0.1:8000/api/logout", {
@@ -25,6 +25,7 @@ const ProfileButton = (user) => {
       //   },
       // });
       // console.log("response: ", response);
+      console.log("logout ...");
       const test = await fetch("http://127.0.0.1:8000/api/logout", {
         method: "POST",
         withCredentials: true,
@@ -34,10 +35,9 @@ const ProfileButton = (user) => {
           Authorization: "Bearer " + cookie.get("jwt"),
         },
       });
-      const data = await test.json();
       cookie.remove("jwt");
-      cookie.remove("name");
-      navigate("/login");
+      // cookie.remove("name");
+      // navigate("/login");
     } catch (error) {
       console.log(error);
     }
@@ -100,23 +100,20 @@ const ProfileButton = (user) => {
                   </a>
                 )}
               </Menu.Item>
-              <form onSubmit={logoutHandler}>
-                <Menu.Item>
-                  {({ active }) => (
-                    <button
-                      type="submit"
-                      className={classNames(
-                        active
-                          ? "bg-white hover:text-[#2D4D5D]"
-                          : "bg-[#2D4D5D]",
-                        "block w-full px-4 py-2 text-left text-sm"
-                      )}
-                    >
-                      Log Out
-                    </button>
-                  )}
-                </Menu.Item>
-              </form>
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                    onClick={logoutHandler}
+                    type="button"
+                    className={classNames(
+                      active ? "bg-white hover:text-[#2D4D5D]" : "bg-[#2D4D5D]",
+                      "block w-full px-4 py-2 text-left text-sm"
+                    )}
+                  >
+                    Log Out
+                  </button>
+                )}
+              </Menu.Item>
             </div>
           </Menu.Items>
         </Transition>

@@ -9,7 +9,7 @@ function AddGoal({ cacrds }) {
   const [note, setNote] = useState("");
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [account, setAccount] = useState(null);
+  const [account, setAccount] = useState(1);
   const [cards, setCards] = useState([]);
 
   const cookie = new Cookies();
@@ -110,25 +110,8 @@ function AddGoal({ cacrds }) {
             />
           </label>
         </div>
-        {/* <label class="block my-5">
-                        <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-                        <i class="fi fi-br-apps me-1"></i> Category
-                        </span>
-                        <select
-                        data-te-select-init
-                        className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
-                        >
-                        <option selected value="1">Select Category</option>
-                        <option value="1">One</option>
-                        <option value="7">Seven</option>
-                        <option value="8">Eight</option>
-                        </select>
-                    </label> */}
         <label className="block mt-5 mb-5">
           <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block font-medium text-slate-700 text-xl">
-            {/* <p className="border-2 border-black inline me-2 p-1 rounded text-customSmall font-semibold bg-black text-white">
-                            IDR
-                        </p> */}
             Ammount
           </span>
           <input
@@ -140,11 +123,7 @@ function AddGoal({ cacrds }) {
           />
         </label>
         <label className="block my-5">
-          <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
-            {/* <FontAwesomeIcon
-                            className="me-2 text-2xl"
-                            icon={faMoneyCheckDollar}
-                        /> */}
+          <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block font-medium text-slate-700 text-xl">
             Account
           </span>
           <select
@@ -161,7 +140,6 @@ function AddGoal({ cacrds }) {
         </label>
         <label className="block my-5">
           <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
-            {/* <FontAwesomeIcon className="text-xl me-2" icon={faPencil} /> */}
             Description
           </span>
           <textarea

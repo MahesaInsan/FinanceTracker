@@ -3,15 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie as FacadesCookie;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Database\QueryException;
 
 class AppController extends Controller
 {
+    public function checkEmail(Request $request)
+    {
+        $email = $request->input('email');
+        $emailExist = User::where('email', $email)->exists();
+        if ($emailExist){
+            return response()->json([
+                "message" => "Email is already exist!"
+            ], Response::HTTP_BAD_REQUEST);
+        }
+    }
+
     public function register(Request $request)
     {
             User::create([
@@ -21,15 +34,14 @@ class AppController extends Controller
             ]);
 
             return response()->json([
-                'status' => 200,
                 'message' => 'User created successfully'
-            ]);
+            ], Response::HTTP_ACCEPTED);
     }
 
     public function login(Request $request){
         if(!Auth::attempt($request->only('email', 'password'))){
             return response([
-                "message" => "invalid cridential"
+                "message" => "Email or Password is Not Valid!"
             ], Response::HTTP_UNAUTHORIZED);
         }
 

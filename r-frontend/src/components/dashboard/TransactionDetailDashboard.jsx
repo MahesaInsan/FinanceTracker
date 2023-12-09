@@ -10,7 +10,6 @@ const rupiah = (number) => {
 };
 
 function TransactionDetailDashboard({ data, tDate }) {
-  console.log(data);
   const getDate = new Date(tDate);
   const formattedDate = format(getDate, "EEEE, dd MMMM yyyy");
   const [day, date] = formattedDate.split(",");
@@ -36,10 +35,11 @@ function TransactionDetailDashboard({ data, tDate }) {
         </div>
       </div>
       <div className="w-1/2 flex flex-col gap-4">
-        {formatedTransaction[tDate].map((data, index) => {
+        {formatedTransaction[tDate].map((data) => {
           return (
             <>
               <TransactionDetailListDashboard
+                key={data.id}
                 goalLogo={"/transactionLogo/salaryLogo.png"}
                 type={"Salary"}
                 disc={data.note}
