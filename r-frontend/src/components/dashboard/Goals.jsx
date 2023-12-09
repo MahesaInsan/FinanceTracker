@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import GoalRow from "./GoalRow";
 import Cookies from "universal-cookie";
+import Skeleton from "react-loading-skeleton";
 
 function Goals() {
   const [goals, setGoals] = useState([]);
@@ -43,10 +44,9 @@ function Goals() {
           goals.map((goal) => <GoalRow key={goal.id} goal={goal} />)
         ) : (
           <>
-            <div className="flex justify-center flex-col text-center">
-              <p>Looks like you don't have any goals yet!</p>
-              <p>Please add a new one!</p>
-            </div>
+            <p>
+              <Skeleton count={3} />
+            </p>
           </>
         )}
       </div>

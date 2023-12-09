@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import TransactionDetailDashboard from "./TransactionDetailDashboard";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import Skeleton from "react-loading-skeleton";
 
 const groupByDate = (transaction) => {
   return transaction.reduce((acc, item) => {
@@ -66,10 +67,12 @@ function TransactionHistoryDashboard() {
               );
             })
           ) : (
+            // <></>
             <>
-              <div className="flex justify-center flex-col text-center">
-                <p>Looks like you don't have any expences yet!</p>
-                <p>Please add a new expence!</p>
+              <div className="body flex flex-col border-r border-b shadow-lg p-6 gap-6">
+                <p>
+                  <Skeleton count={3} />
+                </p>
               </div>
             </>
           )}
