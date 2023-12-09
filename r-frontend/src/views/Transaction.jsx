@@ -25,7 +25,7 @@ const Transaction = () => {
           </div>
           <TransactionFilter />
           <div className="flex flex-col gap-2">
-            <TransactionHistoryDashboard />
+            <TransactionDetailDashboard />
           </div>
         </div>
       </div>
