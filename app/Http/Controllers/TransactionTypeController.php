@@ -16,6 +16,20 @@ class TransactionTypeController extends Controller
         //
     }
 
+    public function getExpense(){
+        $expenseType = TransactionType::where('type', 'Expense')->get();
+        return response()->json([
+            'expenseType' => $expenseType
+        ]);
+    }
+
+    public function getIncome(){
+        $incomeType = TransactionType::where('type', 'Income')->get();
+        return response()->json([
+            'incomeType' => $incomeType
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

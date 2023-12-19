@@ -29,6 +29,8 @@ Route::middleware('auth:sanctum')->group(function () { // harus udah ada token
     Route::get('/cards', [App\Http\Controllers\CardController::class, 'getCards']);
     Route::get('/transaction', [App\Http\Controllers\TransactionController::class, 'getTransactions']);
     Route::post('/transaction/create', [App\Http\Controllers\TransactionController::class, 'setTransaction']);
+    Route::get('/transaction/income', [App\Http\Controllers\TransactionTypeController::class, 'getIncome']);
+    Route::get('/transaction/expense', [App\Http\Controllers\TransactionTypeController::class, 'getExpense']);
     // Route::get('/income', [App\Http\Controllers\TransactionController::class, 'getTransaction']);
     Route::get("/user", [App\Http\Controllers\AppController::class, "user"]);
     Route::post("/logout", [App\Http\Controllers\AppController::class, "logout"]);

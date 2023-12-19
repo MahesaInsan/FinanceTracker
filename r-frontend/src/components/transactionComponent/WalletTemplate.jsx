@@ -3,6 +3,10 @@ const WalletTemplate = ({card})=>{
         backgroundColor: card.colour
     }
 
+    function numberWithCommas(num) {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
     return(
         <div className={`w-[20rem] h-[12rem] flex flex-col p-4 justify-between border rounded-2xl`} style={cardColor}>
             <div>
@@ -17,7 +21,7 @@ const WalletTemplate = ({card})=>{
             </div>
             <div className="flex flex-row justify-between">
                 <div>
-                    {card.name}
+                    Rp. {numberWithCommas(card.balance)}
                 </div>
                 <div>
                     {card.expiredDate}

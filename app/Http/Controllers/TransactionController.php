@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use App\Models\TransactionType;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
+use App\Models\Card;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use PhpParser\Node\Stmt\TryCatch;
+
+use function PHPSTORM_META\type;
 
 class TransactionController extends Controller
 {
@@ -25,9 +29,20 @@ class TransactionController extends Controller
                 "tDate" => $request->input("date"),
                 'note' => $request->input("note"),
                 "card_id" => $request->input("account"),
-                // "transaction_type_id" => "1", // Harus diiisi dulu kalo mau dipake
+                "transaction_type_id" => $request->input("type"),
                 "user_id" => $user->id
             ]);
+
+            $wallet = Card::findOrFail($request->input("account"));
+            $tType = TransactionType::findOrFail($request->input("type"));
+            if($tType->type == "Expense"){
+                $wallet->balance = $wallet->balance - $request->input("amount");
+                $wallet->save();
+            }
+            if($tType->type == "Income"){
+                $wallet->balance = $wallet->balance + $request->input("amount");
+                $wallet->save();
+            }
         }
 
         return response()->json([

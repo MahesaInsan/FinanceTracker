@@ -1,19 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import expenceImg from "/expence/expence.png";
 import "./modal.css";
 import Cookies from "universal-cookie";
 import axios from "axios";
 
-const AddExpense = ({ cards }) => {
+const AddExpense = ({ cards, setOpenModal }) => {
   const [date, setDate] = useState("");
   const [amount, setAmount] = useState(0);
   const [account, setAccount] = useState(1);
+  const [type, setType] = useState(1);
   const [note, setNote] = useState("");
+  const [expense, setExpense] = useState([]);
   const cookie = new Cookies();
+
+  useEffect(() => {
+    const fetchExpense = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/api/transaction/expense", {
+          headers: {
+            accept: "application/json",
+            Authorization: "Bearer " + cookie.get("jwt"),
+          },
+        });
+        setExpense(response.data.expenseType);
+        console.log("expense : ", expense);
+      } catch (error) {
+        console.log("failed");
+        console.log(error.response);
+      }
+    };
+
+    fetchExpense();
+  }, []);
 
   const handleOnClick = async (e) => {
     e.preventDefault();
-
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/transaction/create",
@@ -22,6 +43,7 @@ const AddExpense = ({ cards }) => {
           amount: amount,
           account: account,
           note: note,
+          type: type
         },
         {
           withCredentials: true,
@@ -38,11 +60,10 @@ const AddExpense = ({ cards }) => {
   };
 
   return (
-    <div className="container mx-auto p-5 grid grid-cols-2 gap-x-20">
+    <div className="container mx-auto p-5">
       <form onSubmit={handleOnClick}>
         <label className="block my-5">
           <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
-            {/* <FontAwesomeIcon className="me-2 text-xl" icon={faCalendarDays} /> */}
             Date
           </span>
           <input
@@ -54,41 +75,39 @@ const AddExpense = ({ cards }) => {
             onChange={(e) => setDate(e.target.value)}
           />
         </label>
-        {/* <label class="block my-5">
-              <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-              <i class="fi fi-br-apps me-1"></i> Category
-              </span>
-              <select
-                data-te-select-init
-                className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
-              >
-                <option selected value="1">Select Category</option>
-                <option value="1">One</option>
-                <option value="7">Seven</option>
-                <option value="8">Eight</option>
-              </select>
-            </label> */}
         <label className="block mt-5 mb-5">
           <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
-            {/* <p className="border-2 border-black inline me-2 p-1 rounded text-customSmall font-semibold bg-black text-white">
-                  IDR
-                </p> */}
-            Ammount
+            Amount
           </span>
           <input
             type="number"
             name="number"
             className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
-            placeholder="you@example.com"
+            placeholder="100000"
             onChange={(e) => setAmount(e.target.value)}
           />
         </label>
         <label className="block my-5">
           <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
-            {/* <FontAwesomeIcon
-                  className="me-2 text-2xl"
-                  icon={faMoneyCheckDollar}
-                /> */}
+            Transaction Type
+          </span>
+          <select
+            data-te-select-init
+            className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+            onChange={(e) => {
+              setType(e.target.value);
+            }}
+            value={type}
+          >
+            {expense.map((exp) => (
+              <option value={exp.id} key={exp.id}>
+                {exp.name}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className="block my-5">
+          <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
             Account
           </span>
           <select
@@ -108,7 +127,6 @@ const AddExpense = ({ cards }) => {
         </label>
         <label className="block my-5">
           <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
-            {/* <FontAwesomeIcon className="text-xl me-2" icon={faPencil} /> */}
             Note
           </span>
           <textarea
@@ -120,11 +138,11 @@ const AddExpense = ({ cards }) => {
           ></textarea>
         </label>
         <button className="p-3 bg-primaryColor hover:bg-hoverSecondaryColor text-white rounded">
-          Add New Expence
+          Add New Expense
         </button>
       </form>
 
-      <div className="ilustration flex flex-col items-center">
+      {/* <div className="ilustration flex flex-col items-center">
         <figure>
           <img src={expenceImg} alt="expenceIlustation" className="h-96" />
         </figure>
@@ -138,7 +156,7 @@ const AddExpense = ({ cards }) => {
             finances better and reach your goals faster.
           </p>
         </figcaption>
-      </div>
+      </div> */}
     </div>
   );
 };

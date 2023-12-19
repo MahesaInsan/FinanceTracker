@@ -28,7 +28,7 @@ const WalletDetail = ()=>{
 
     return(
         <div className="flex flex-col gap-4">
-            <div className="flex gap-4">
+            <div className="flex gap-4 mb-4">
                 {cards?.map((card) => (
                     <WalletTemplate key={card.id} card={card}/>
                 ))}

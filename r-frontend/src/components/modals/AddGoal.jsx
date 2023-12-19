@@ -3,36 +3,15 @@ import goalImg from "/goal/goal.png";
 import axios from "axios";
 import Cookies from "universal-cookie";
 
-function AddGoal({ cacrds }) {
+function AddGoal({ cards }) {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState(1);
   const [note, setNote] = useState("");
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [account, setAccount] = useState(1);
-  const [cards, setCards] = useState([]);
 
   const cookie = new Cookies();
-
-  useEffect(() => {
-    const fetchCards = async () => {
-      try {
-        const response = await axios.get("http://127.0.0.1:8000/api/cards", {
-          headers: {
-            accept: "application/json",
-            Authorization: "Bearer " + cookie.get("jwt"),
-          },
-        });
-        setCards(response.data.cards);
-        console.log("cards : ", cards);
-      } catch (error) {
-        console.log("failed");
-        console.log(error.response);
-      }
-    };
-
-    fetchCards();
-  }, []);
 
   const handleOnClick = async (e) => {
     e.preventDefault();
@@ -60,16 +39,14 @@ function AddGoal({ cacrds }) {
     } catch (error) {
       console.log(error.response); // This should be 401 if unauthorized
     }
+    
   };
 
   return (
-    <div className="container mx-auto p-5 grid grid-cols-2 gap-x-20">
+    <div className="container mx-auto p-5">
       <form onSubmit={handleOnClick}>
         <label className="block mt-5 mb-5">
           <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
-            {/* <p className="border-2 border-black inline me-2 p-1 rounded text-customSmall font-semibold bg-black text-white">
-                        IDR
-                    </p> */}
             Name
           </span>
           <input
@@ -83,7 +60,6 @@ function AddGoal({ cacrds }) {
         <div className="flex flex-row justify-between gap-x-5">
           <label className="block w-1/2">
             <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
-              {/* <FontAwesomeIcon className="me-2 text-xl" icon={faCalendarDays} /> */}
               Start Date
             </span>
             <input
@@ -97,7 +73,6 @@ function AddGoal({ cacrds }) {
           </label>
           <label className="block w-1/2">
             <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
-              {/* <FontAwesomeIcon className="me-2 text-xl" icon={faCalendarDays} /> */}
               End Date
             </span>
             <input
@@ -112,13 +87,13 @@ function AddGoal({ cacrds }) {
         </div>
         <label className="block mt-5 mb-5">
           <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block font-medium text-slate-700 text-xl">
-            Ammount
+            Amount
           </span>
           <input
             type="number"
             name="number"
             className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
-            placeholder="you@example.com"
+            placeholder="10000"
             onChange={(e) => setAmount(e.target.value)}
           />
         </label>
@@ -151,11 +126,11 @@ function AddGoal({ cacrds }) {
           ></textarea>
         </label>
         <button className="p-3 bg-primaryColor hover:bg-hoverSecondaryColor text-white rounded">
-          Add New Expence
+          Add New Goal
         </button>
       </form>
 
-      <div className="ilustration flex flex-col items-center">
+      {/* <div className="ilustration flex flex-col items-center">
         <figure>
           <img src={goalImg} alt="expenceIlustation" className="h-96" />
         </figure>
@@ -168,7 +143,7 @@ function AddGoal({ cacrds }) {
             progress and achievements.
           </p>
         </figcaption>
-      </div>
+      </div> */}
     </div>
   );
 }

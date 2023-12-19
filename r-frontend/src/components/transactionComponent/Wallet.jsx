@@ -6,7 +6,7 @@ const Wallet = ()=>{
             <p className="font-medium text-xl">Select Wallet</p>
             <div className="flex gap-6 font-medium">
                 <button className="hover:text-[#3A89A0] hover:underline underline-offset-8">Card</button>
-                <button className="hover:text-[#3A89A0] hover:underline underline-offset-8">E-Money</button>
+                {/* <button className="hover:text-[#3A89A0] hover:underline underline-offset-8">E-Money</button> */}
             </div>
             <WalletDetail />
         </div>

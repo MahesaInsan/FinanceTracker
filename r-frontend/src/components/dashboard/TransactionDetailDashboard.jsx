@@ -50,20 +50,6 @@ function TransactionDetailDashboard({ data, tDate }) {
             </>
           );
         })}
-        {/* <TransactionDetailListDashboard
-          goalLogo={"/transactionLogo/drinkLogo.png"}
-          type={"Drink"}
-          disc={"Ice lemon tea"}
-          color={"text-[#DF2424] flex items-center"}
-          price={"- Rp. 5.000"}
-        />
-        <TransactionDetailListDashboard
-          goalLogo={"/transactionLogo/foodLogo.png"}
-          type={"Food"}
-          disc={"Pizza hut"}
-          color={"text-[#DF2424] flex items-center"}
-          price={"- Rp. 45.000"}
-        /> */}
         <a className="text-end">
           <button>See Detail</button>
         </a>
