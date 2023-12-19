@@ -4,6 +4,7 @@ import "./modal.css";
 import AddExpense from "./AddExpense";
 import AddIncome from "./AddIncome";
 import AddGoal from "./AddGoal";
+import AddInvest from "./AddInvest";
 import Cookies from "universal-cookie";
 
 const ModalTemplate = ({ setOpenModal }) => {
@@ -33,7 +34,8 @@ const ModalTemplate = ({ setOpenModal }) => {
 
   return (
     <div className="modalBackground h-screen w-screen flex justify-center items-center">
-      <div className="modalContainer bg-white h-[95%] w-[50%] p-8 rounded-xl">
+      <span className="modalContainer bg-white
+       w-[50%] p-8 rounded-xl">
         <div className="w-full flex justify-end">
           <button onClick={() => setOpenModal(false)}>X</button>
         </div>
@@ -71,11 +73,23 @@ const ModalTemplate = ({ setOpenModal }) => {
           >
             Goal
           </button>
+          <button
+            className={`hover:underline hover:underline-offset-8 hover:text-secondaryColor hover:font-semibold
+                        ${
+                          activeForm === "Invest"
+                            ? "underline underline-offset-8 text-secondaryColor font-semibold"
+                            : ""
+                        }`}
+            onClick={() => setActiveForm("Invest")}
+          >
+            Invest
+          </button>
         </div>
         {activeForm === "Expense" && <AddExpense cards={cards} setOpenModal={setOpenModal} />}
         {activeForm === "Income" && <AddIncome cards={cards} setOpenModal={setOpenModal}/>}
         {activeForm === "Goal" && <AddGoal cards={cards} setOpenModal={setOpenModal}/>}
-      </div>
+        {activeForm === "Invest" && <AddInvest cards={cards} setOpenModal={setOpenModal}/>}
+      </span>
     </div>
   );
 };

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Card;
 use App\Http\Requests\StoreCardRequest;
 use App\Http\Requests\UpdateCardRequest;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class CardController extends Controller
@@ -54,6 +55,28 @@ class CardController extends Controller
     public function store(StoreCardRequest $request)
     {
         //
+    }
+
+    public function getTotal(){
+        $user = $this->user->user();
+        $cards = Card::where('user_id', $user->id)->get();
+        $transaction = Transaction::with('TransactionType')->get();
+        $total = 0;
+        $totIncome = 0;
+        $totExpense = 0;
+        foreach ($cards as $card) {
+            $total += $card->balance;
+        }
+        foreach ($transaction as $tran){
+            if($tran->transactionType->type == "Income"){
+                $totIncome += $tran->amount;
+            }else $totExpense += $tran->amount;
+        }
+        return response()->json([
+            'total' => $total,
+            'totIncome' => $totIncome,
+            'totExpense' => $totExpense,
+        ]);
     }
 
     /**

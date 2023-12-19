@@ -1,49 +1,47 @@
 import React, { useEffect, useState } from "react";
-import expenceImg from "/expence/expence.png";
-import "./modal.css";
+import incomeImg from "/income/income.png";
 import Cookies from "universal-cookie";
 import axios from "axios";
 
-const AddExpense = ({ cards, setOpenModal }) => {
+function AddIncome({ cards , setOpenModal }) {
   const [date, setDate] = useState("");
   const [amount, setAmount] = useState(0);
   const [account, setAccount] = useState(1);
-  const [type, setType] = useState(1);
+  const [goal, setGoal] = useState(1);
+  const [goals, setGoals] = useState([]);
   const [note, setNote] = useState("");
-  const [expense, setExpense] = useState([]);
   const cookie = new Cookies();
 
   useEffect(() => {
-    const fetchExpense = async () => {
+    const fetchGoals = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/transaction/expense", {
+        const response = await axios.get("http://127.0.0.1:8000/api/goals", {
           headers: {
-            accept: "application/json",
+            Accept: "application/json",
             Authorization: "Bearer " + cookie.get("jwt"),
           },
         });
-        setExpense(response.data.expenseType);
-        console.log("expense : ", expense);
+        setGoals(response.data.goals);
+        setGoal(response.data.goals[0].id)
       } catch (error) {
-        console.log("failed");
-        console.log(error.response);
+        console.log(error.response); // This should be 401 if unauthorized
       }
     };
 
-    fetchExpense();
+    fetchGoals();
   }, []);
 
   const handleOnClick = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/transaction/create",
+        "http://127.0.0.1:8000/api/transaction/invest",
         {
           date: date,
           amount: amount,
           account: account,
           note: note,
-          type: type
+          goal: goal
         },
         {
           withCredentials: true,
@@ -64,6 +62,7 @@ const AddExpense = ({ cards, setOpenModal }) => {
       <form onSubmit={handleOnClick}>
         <label className="block my-5">
           <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
+            {/* <FontAwesomeIcon className="me-2 text-xl" icon={faCalendarDays} /> */}
             Date
           </span>
           <input
@@ -89,21 +88,21 @@ const AddExpense = ({ cards, setOpenModal }) => {
         </label>
         <label className="block my-5">
           <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
-            Transaction Type
+            Goal to Invest
           </span>
           <select
             data-te-select-init
             className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
             onChange={(e) => {
-              setType(e.target.value);
+              setGoal(e.target.value);
+              console.log("Selected value:", e.target.value);
             }}
-            value={type}
+            value={goal}
           >
-            {expense.map((exp) => (
-              !(exp.name === "Investment") && 
-                <option value={exp.id} key={exp.id}>  
-                  {exp.name}
-                </option>              
+            {goals.map((goal) => (
+              <option value={goal.id} key={goal.id}>
+                {goal.name}
+              </option>
             ))}
           </select>
         </label>
@@ -115,6 +114,7 @@ const AddExpense = ({ cards, setOpenModal }) => {
             data-te-select-init
             className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
             onChange={(e) => {
+              console.log("Selected value:", e.target.value);
               setAccount(e.target.value);
             }}
             value={account}
@@ -128,6 +128,7 @@ const AddExpense = ({ cards, setOpenModal }) => {
         </label>
         <label className="block my-5">
           <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-xl">
+            {/* <FontAwesomeIcon className="text-xl me-2" icon={faPencil} /> */}
             Note
           </span>
           <textarea
@@ -139,27 +140,27 @@ const AddExpense = ({ cards, setOpenModal }) => {
           ></textarea>
         </label>
         <button className="p-3 bg-primaryColor hover:bg-hoverSecondaryColor text-white rounded">
-          Add New Expense
+          Add New Income
         </button>
       </form>
 
       {/* <div className="ilustration flex flex-col items-center">
         <figure>
-          <img src={expenceImg} alt="expenceIlustation" className="h-96" />
+          <img src={incomeImg} alt="expenceIlustation" className="h-96" />
         </figure>
         <figcaption>
           <h2 className="text-3xl font-bold text-center mb-3">
-            Add Your <span className="text-secondaryColor">Expence</span>
+            Add Your <span className="text-secondaryColor">Income</span>
           </h2>
           <p className="text-center text-lg">
-            {`Don't`} let the numbers get in the way of your dreams. Update your
-            daily expenses regularly and realistically so you can manage your
-            finances better and reach your goals faster.
+            Recording our income can help us know our income sources, whether
+            from salary, business, investment, or others. We can evaluate
+            whether our payment aligns with our financial goals and plans.
           </p>
         </figcaption>
       </div> */}
     </div>
   );
-};
+}
 
-export default AddExpense;
+export default AddIncome;

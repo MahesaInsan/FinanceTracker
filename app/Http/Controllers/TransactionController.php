@@ -7,6 +7,7 @@ use App\Models\TransactionType;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Models\Card;
+use App\Models\Goal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use PhpParser\Node\Stmt\TryCatch;
@@ -56,6 +57,35 @@ class TransactionController extends Controller
         ]);
     }
 
+    public function setInvest(Request $request){
+        $user = $this->user->user();
+
+        if ($user) {
+            Transaction::create([
+                'amount' => $request->input("amount"),
+                "tDate" => $request->input("date"),
+                'note' => $request->input("note"),
+                "card_id" => $request->input("account"),
+                "goal_id" => $request->input("goal"),
+                "transaction_type_id" => 5,
+                "user_id" => $user->id
+            ]);
+
+            $goal = Goal::findOrFail($request->input("goal"));
+            $goal->invested += $request->input("amount");
+            $goal->save();
+        }
+
+        return response()->json([
+            'amount' => $request->input("amount"),
+            'note' => $request->input("note"),
+            "tDate" => $request->input("date"),
+            "card_id" => $request->input("account"),
+            'amount' => (int) $request->input("amount"),
+            "user_id" => $user->id
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -83,7 +113,7 @@ class TransactionController extends Controller
     public function getTransactions()
     {
         $user = $this->user->user();
-        $transaction = Transaction::all();
+        $transaction = Transaction::with('TransactionType')->get();
 
         return response()->json([
             "transaction" => $transaction

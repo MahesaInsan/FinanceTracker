@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TransactionDetailListDashboard from "./TransactionDetailListDashboard";
 import { format } from "date-fns";
 
@@ -14,6 +14,18 @@ function TransactionDetailDashboard({ data, tDate }) {
   const formattedDate = format(getDate, "EEEE, dd MMMM yyyy");
   const [day, date] = formattedDate.split(",");
   const formatedTransaction = data;
+  const [income, setIncome] = useState(0);
+  const [expense, setExpense] = useState(0);
+
+  useEffect(() => {
+    const fetchTotal = async () => {
+      formatedTransaction[tDate].map((data) => {
+        data.transaction_type.type === "Expense" ? setExpense(expense + data.amount) : setIncome(income + data.amount)
+      });
+    };
+    fetchTotal();
+  }, []);
+
   return (
     <div className="flex flex-row w-full justify-between border-r border-b shadow-md rounded-lg p-6 px-16">
       <div className="flex flex-col w-1/2 justify-center align-center text-xl gap-4">
@@ -26,11 +38,11 @@ function TransactionDetailDashboard({ data, tDate }) {
         <div className="flex flex-row gap-16">
           <div>
             <p>Income</p>
-            <p className="font-semibold">Rp. 500.000</p>
+            <p className="font-semibold">{rupiah(income)}</p>
           </div>
           <div>
             <p>Expense</p>
-            <p className="font-semibold">Rp. 50.000</p>
+            <p className="font-semibold">{rupiah(expense)}</p>
           </div>
         </div>
       </div>
@@ -40,12 +52,12 @@ function TransactionDetailDashboard({ data, tDate }) {
             <>
               <TransactionDetailListDashboard
                 key={data.id}
-                goalLogo={"/transactionLogo/salaryLogo.png"}
-                type={"Salary"}
+                goalLogo={data.transaction_type.logo}
+                type={data.transaction_type.name}
                 disc={data.note}
-                color={"text-[#DF2424] flex items-center"}
+                color={data.transaction_type.type == "Expense" ? "text-[#DF2424] flex items-center" : "text-[#62C668] flex items-center"}
                 // color={"text-[#62C668] flex items-center"}
-                price={`- ${rupiah(data.amount)}`}
+                price={data.transaction_type.type == "Expense" ? `- ${rupiah(data.amount)}` : `${rupiah(data.amount)}`}
               />
             </>
           );
