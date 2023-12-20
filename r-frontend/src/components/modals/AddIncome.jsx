@@ -21,8 +21,10 @@ function AddIncome({ cards , setOpenModal }) {
             Authorization: "Bearer " + cookie.get("jwt"),
           },
         });
+        console.log(cards)
         setType(response.data.incomeType[0].id);
         setIncome(response.data.incomeType);
+        setAccount(cards[0].id);
         console.log("income : ", income);
       } catch (error) {
         console.log("failed");
@@ -31,7 +33,7 @@ function AddIncome({ cards , setOpenModal }) {
     };
 
     fetchExpense();
-  }, []);
+  }, [cards]);
 
   const handleOnClick = async (e) => {
     e.preventDefault();

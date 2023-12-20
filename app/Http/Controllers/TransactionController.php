@@ -158,7 +158,7 @@ class TransactionController extends Controller
     public function getTransactions()
     {
         $user = $this->user->user();
-        $transaction = Transaction::with('TransactionType')->get();
+        $transaction = Transaction::with('TransactionType')->where('user_id', $user->id)->get();
 
         return response()->json([
             "transaction" => $transaction

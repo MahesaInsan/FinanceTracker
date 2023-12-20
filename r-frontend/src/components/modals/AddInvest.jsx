@@ -23,13 +23,14 @@ function AddIncome({ cards , setOpenModal }) {
         });
         setGoals(response.data.goals);
         setGoal(response.data.goals[0].id)
+        setAccount(cards[0].id);
       } catch (error) {
         console.log(error.response); // This should be 401 if unauthorized
       }
     };
 
     fetchGoals();
-  }, []);
+  }, [cards]);
 
   const handleOnClick = async (e) => {
     e.preventDefault();

@@ -23,6 +23,9 @@ const AddExpense = ({ cards, setOpenModal }) => {
           },
         });
         setExpense(response.data.expenseType);
+        setType(response.data.expenseType[0].id);
+        setAccount(cards[0].id);
+        console.log(cards)
         console.log("expense : ", expense);
       } catch (error) {
         console.log("failed");
@@ -31,7 +34,7 @@ const AddExpense = ({ cards, setOpenModal }) => {
     };
 
     fetchExpense();
-  }, []);
+  }, [cards]);
 
   const handleOnClick = async (e) => {
     e.preventDefault();
@@ -54,10 +57,11 @@ const AddExpense = ({ cards, setOpenModal }) => {
           },
         }
       );
+      console.log(date, amount, account, note, type)
     } catch (error) {
       console.log(error.response.data.message);
     }
-    window.location.reload(false)
+    /* window.location.reload(false) */
   };
 
   return (
