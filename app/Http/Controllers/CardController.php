@@ -79,6 +79,31 @@ class CardController extends Controller
         ]);
     }
 
+    public function addCard(Request $request){
+        $user = $this->user->user();
+        if ($user) {
+            Card::create([
+                'name' => $request->input("name"),
+                "number" => $request->input("number"),
+                'type' => $request->input("type"),
+                "balance" => $request->input("balance"),
+                "expiredDate" => $request->input("date"),
+                "user_id" => $user->id,
+                "colour" => "785AA6"
+            ]);
+        }
+
+        return response()->json([
+            'name' => $request->input("name"),
+            "number" => $request->input("number"),
+            'type' => $request->input("type"),
+            "balance" => $request->input("balance"),
+            "expiredDate" => $request->input("date"),
+            "user_id" => $user->id,
+            "colour" => "785AA6"
+        ]);
+    }
+
     /**
      * Display the specified resource.
      */

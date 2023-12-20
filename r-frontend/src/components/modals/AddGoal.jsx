@@ -40,6 +40,7 @@ function AddGoal({ cards }) {
       console.log(error.response); // This should be 401 if unauthorized
     }
     
+    window.location.reload(false)
   };
 
   return (
