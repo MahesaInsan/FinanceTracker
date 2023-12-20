@@ -16,12 +16,15 @@ const AddExpense = ({ cards, setOpenModal }) => {
   useEffect(() => {
     const fetchExpense = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/transaction/expense", {
-          headers: {
-            accept: "application/json",
-            Authorization: "Bearer " + cookie.get("jwt"),
-          },
-        });
+        const response = await axios.get(
+          "http://127.0.0.1:8000/api/transaction/expense",
+          {
+            headers: {
+              accept: "application/json",
+              Authorization: "Bearer " + cookie.get("jwt"),
+            },
+          }
+        );
         setExpense(response.data.expenseType);
         console.log("expense : ", expense);
       } catch (error) {
@@ -43,7 +46,7 @@ const AddExpense = ({ cards, setOpenModal }) => {
           amount: amount,
           account: account,
           note: note,
-          type: type
+          type: type,
         },
         {
           withCredentials: true,
@@ -57,7 +60,7 @@ const AddExpense = ({ cards, setOpenModal }) => {
     } catch (error) {
       console.log(error.response.data.message);
     }
-    window.location.reload(false)
+    window.location.reload(false);
   };
 
   return (
@@ -73,6 +76,7 @@ const AddExpense = ({ cards, setOpenModal }) => {
             type="date"
             className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
             placeholder="dd/mm/yyyy"
+            required
             onChange={(e) => setDate(e.target.value)}
           />
         </label>
@@ -85,6 +89,7 @@ const AddExpense = ({ cards, setOpenModal }) => {
             name="number"
             className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
             placeholder="100000"
+            required
             onChange={(e) => setAmount(e.target.value)}
           />
         </label>
@@ -100,12 +105,14 @@ const AddExpense = ({ cards, setOpenModal }) => {
             }}
             value={type}
           >
-            {expense.map((exp) => (
-              !(exp.name === "Investment") && 
-                <option value={exp.id} key={exp.id}>  
-                  {exp.name}
-                </option>              
-            ))}
+            {expense.map(
+              (exp) =>
+                !(exp.name === "Investment") && (
+                  <option value={exp.id} key={exp.id}>
+                    {exp.name}
+                  </option>
+                )
+            )}
           </select>
         </label>
         <label className="block my-5">
@@ -135,7 +142,8 @@ const AddExpense = ({ cards, setOpenModal }) => {
             id="message"
             rows="4"
             className="w-full px-3 py-2 bg-white  border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md sm:text-sm focus:ring-1"
-            placeholder="Write your thoughts here..."
+            placeholder="Fried Noodle with extra egg"
+            required
             onChange={(e) => setNote(e.target.value)}
           ></textarea>
         </label>

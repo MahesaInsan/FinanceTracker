@@ -2,13 +2,13 @@ import React from 'react';
 
 export default function Why() {
     return (
-        <div className='flex pt-40 flex-row gap-24 align-middle justify-center pb-32'>
-            <div className='flex items-center'>
+        <div className='flex pt-40 flex-col lg:flex-row gap-24 align-middle items-center justify-center pb-32'>
+            <div className='hidden lg:flex items-center'>
                 <div className='flex bg-[#3A89A0] my-24 h-1 w-20 rounded-full'></div>
             </div>
 
-            <div className='flex flex-col justify-center align-middle'>
-                <h1 className='text-5xl font-bold'>Why should you</h1>
+            <div className='flex flex-col justify-center align-middle items-center'>
+                <h1 className='text-5xl font-bold text-center'>Why should you</h1>
                 <h1 className='pt-4 pb-2 text-4xl font-bold text-[#3A89A0]'>
                     Choose Us?
                 </h1>
@@ -16,7 +16,7 @@ export default function Why() {
             </div>
 
             <div className='flex flex-col gap-10'>
-                <div className='flex flex-row gap-20'>
+                <div className='flex flex-col sm:flex-row gap-10 lg:gap-20'>
                     <div className='flex flex-col h-[16rem] w-[18rem] border-r border-b gap-4 pb-6 pt-8 pl-8 pr-6 shadow-lg'>
                         <h1 className='text-bold text-xl'>Tracker</h1>
                         <p>
@@ -36,7 +36,7 @@ export default function Why() {
                     </div>
                 </div>
 
-                <div className='flex flex-row gap-20'>
+                <div className='flex flex-col sm:flex-row gap-10 lg:gap-20'>
                     <div className='flex flex-col h-[16rem] w-[18rem] border-r border-b gap-4 pb-6 pt-8 pl-8 pr-6 shadow-lg'>
                         <h1 className='text-bold text-xl'>Finance Problem</h1>
                         <p>
@@ -58,7 +58,7 @@ export default function Why() {
             </div>
             
             <div className='flex items-center'>
-                <div className='flex bg-[#3A89A0] my-24 h-1 w-20 rounded-full'></div>
+                <div className='hidden lg:flex bg-[#3A89A0] my-24 h-1 w-20 rounded-full'></div>
             </div>
         </div>
     );

@@ -29,6 +29,8 @@ class AppController extends Controller
 
     public function register(Request $request)
     {
+
+        $filename = null;
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
                 $path = 'public/images/user/';
@@ -44,7 +46,6 @@ class AppController extends Controller
             ]);
 
             return response()->json([
-                'loc' => $path,
                 'message' => 'User created successfully'
             ], Response::HTTP_ACCEPTED);
     }

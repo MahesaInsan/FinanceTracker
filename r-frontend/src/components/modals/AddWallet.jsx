@@ -43,7 +43,7 @@ const AddWallet = ({ setOpenModal }) => {
     return (
       <div className="modalBackground h-screen w-screen flex justify-center items-center">
         <span className="modalContainer bg-white
-         w-[50%] p-8 rounded-xl">
+         w-[90%] md:w-[75%] lg:w-[50%] p-8 rounded-xl">
           <div className="w-full flex justify-end">
             <button onClick={() => setOpenModal(false)}>X</button>
           </div>
@@ -59,6 +59,7 @@ const AddWallet = ({ setOpenModal }) => {
               rows="4"
               className="w-full px-3 py-2 bg-white  border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md sm:text-sm focus:ring-1"
               placeholder="Input your card name here..."
+              required
               onChange={(e) => setName(e.target.value)}
             ></input>
             </label>
@@ -73,6 +74,7 @@ const AddWallet = ({ setOpenModal }) => {
                 rows="4"
                 className="w-full px-3 py-2 bg-white  border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md sm:text-sm focus:ring-1"
                 placeholder="Input your card number here..."
+                required
                 onChange={(e) => setNumber(e.target.value)}
             ></input>
             </label>
@@ -87,6 +89,7 @@ const AddWallet = ({ setOpenModal }) => {
                 type="date"
                 className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                 placeholder="dd/mm/yyyy"
+                required
                 onChange={(e) => setDate(e.target.value)}
             />
             </label>
@@ -99,6 +102,7 @@ const AddWallet = ({ setOpenModal }) => {
                 name="number"
                 className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                 placeholder="Input your card balance here..."
+                required
                 onChange={(e) => setBalance(e.target.value)}
             />
             </label>
@@ -113,6 +117,7 @@ const AddWallet = ({ setOpenModal }) => {
                 rows="4"
                 className="w-full px-3 py-2 bg-white  border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md sm:text-sm focus:ring-1"
                 placeholder="Input your card type (credit, debit, e-wallet, etc.) here..."
+                required
                 onChange={(e) => setType(e.target.value)}
             ></input>
             </label>

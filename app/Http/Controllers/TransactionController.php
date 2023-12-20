@@ -86,6 +86,51 @@ class TransactionController extends Controller
         ]);
     }
 
+    public function getSpending(){
+        $user = $this->user->user();
+        $transactions = Transaction::with('transactionType')
+        ->where('user_id', $user->id)
+        ->get();
+        $total = 0;
+        $food = 0;
+        $transportation = 0;
+        $daily = 0;
+        $investment = 0;
+
+        $foodpcnt = 0.0;
+        $transportpcnt = 0.0;
+        $dailypcnt = 0.0;
+        $invesmentpcnt = 0.0;
+
+        foreach($transactions as $trans){
+            if($trans->transactionType->type != "Income"){
+                $total += $trans->amount;
+            if($trans->transactionType->name == "Food"){
+                $food = $trans->amount;
+            }else if($trans->transactionType->name == "Transportation"){
+                $transportation = $trans->amount;
+            }else if($trans->transactionType->name == "Daily"){
+                $daily = $trans->amount;
+            }else if($trans->transactionType->name == "Investment"){
+                $investment = $trans->amount;
+            }
+            }
+        }
+
+        $foodpcnt = $food / $total * 100;
+        $transportpcnt = $transportation / $total * 100;
+        $dailypcnt = $daily / $total * 100;
+        $invesmentpcnt = $investment / $total * 100;
+
+        return response()->json([
+            'food' => $foodpcnt,
+            'transportation' => $transportpcnt,
+            'daily' => $dailypcnt,
+            'invesment' => $invesmentpcnt,
+        ]);
+
+    }
+
     /**
      * Display a listing of the resource.
      */

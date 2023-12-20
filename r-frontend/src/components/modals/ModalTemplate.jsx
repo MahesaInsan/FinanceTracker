@@ -33,9 +33,11 @@ const ModalTemplate = ({ setOpenModal }) => {
   }, []);
 
   return (
-    <div className="modalBackground h-screen w-screen flex justify-center items-center">
-      <span className="modalContainer bg-white
-       w-[50%] p-8 rounded-xl">
+    <div
+      className="modalBackground h-screen w-screen flex justify-center items-center"
+      style={{ zIndex: 1 }}
+    >
+      <span className="modalContainer bg-white w-[90%] md:w-[75%] lg:w-[50%] p-8 rounded-xl">
         <div className="w-full flex justify-end">
           <button onClick={() => setOpenModal(false)}>X</button>
         </div>
@@ -85,10 +87,18 @@ const ModalTemplate = ({ setOpenModal }) => {
             Invest
           </button>
         </div>
-        {activeForm === "Expense" && <AddExpense cards={cards} setOpenModal={setOpenModal} />}
-        {activeForm === "Income" && <AddIncome cards={cards} setOpenModal={setOpenModal}/>}
-        {activeForm === "Goal" && <AddGoal cards={cards} setOpenModal={setOpenModal}/>}
-        {activeForm === "Invest" && <AddInvest cards={cards} setOpenModal={setOpenModal}/>}
+        {activeForm === "Expense" && (
+          <AddExpense cards={cards} setOpenModal={setOpenModal} />
+        )}
+        {activeForm === "Income" && (
+          <AddIncome cards={cards} setOpenModal={setOpenModal} />
+        )}
+        {activeForm === "Goal" && (
+          <AddGoal cards={cards} setOpenModal={setOpenModal} />
+        )}
+        {activeForm === "Invest" && (
+          <AddInvest cards={cards} setOpenModal={setOpenModal} />
+        )}
       </span>
     </div>
   );

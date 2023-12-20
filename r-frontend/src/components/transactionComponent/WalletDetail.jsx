@@ -33,7 +33,7 @@ const WalletDetail = ()=>{
 
     return(
         <div className="flex flex-col gap-4">
-            <div className="flex gap-4 mb-4">
+            <div className="flex gap-4 mb-4 maxw-100 overflow-auto">
                 {cards?.map((card) => (
                     <button className="text-left" onClick={() => chooseCard(card)}>
                         <WalletTemplate key={card.id} card={card}/>

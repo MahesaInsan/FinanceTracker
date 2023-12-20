@@ -16,19 +16,19 @@ export default function Offer() {
                 <p>Our products are ready to serve you</p>
             </div>
 
-            <div className='flex flex-row gap-20'>
+            <div className='flex flex-col lg:flex-row gap-20'>
                 <div className='flex flex-col justify-center items-center align-middle border-2 border-[#2D4D5D] px-8 py-8 rounded-lg w-[20rem] h-[15rem]'>
                     <div className='flex rounded-full bg-[#8CC7D4] w-[4rem] h-[4rem] items-center justify-center align-middle'>
                         <img src={AI} alt='gambar AI' />
                     </div>
                     <div className='flex flex-col'>
-                        <h1 className='pt-2 font-bold'>AI</h1>
-                        <p className='pt-2'>There is an AI that help you</p>
-                        <p>achive your goals</p>
+                        <h1 className='pt-2 font-bold'>Computation</h1>
+                        <p className='pt-2'>Our application are</p>
+                        <p>fully automatical</p>
                     </div>
                 </div>
 
-                <div className='flex flex-col justify-center items-center align-middle border-2 border-[#2D4D5D] px-8 py-8 rounded-lg w-[20rem] mt-[10rem] h-[15rem]'>
+                <div className='flex flex-col justify-center items-center align-middle border-2 border-[#2D4D5D] px-8 py-8 rounded-lg w-[20rem] lg:mt-[10rem] h-[15rem]'>
                     <div className='flex rounded-full bg-[#8CC7D4] w-[4rem] h-[4rem] items-center justify-center align-middle'>
                         <img src={history} alt='gambar AI' />
                     </div>

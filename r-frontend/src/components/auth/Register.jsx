@@ -124,13 +124,13 @@ const Register = () => {
   return (
     <>
       <div className="container mx-auto p-5 flex justify-center items-center h-screen">
-        <div className="grid grid-cols-2 gap-x-20 pl-[15%] pr-[15%]">
-          <div className="flex items-center">
+        <div className="grid grid-rows-3 w-full lg:w-auto lg:grid-cols-2 lg:grid-rows-1 gap-x-20 pl-[15%] pr-[15%]">
+          <div className="flex items-center justify-center">
             <h1 className="text-5xl font-semibold leading-tight">
               <span className="text-secondaryColor">Register</span> <br /> Page
             </h1>
           </div>
-          <form onSubmit={submitHandler}>
+          <form onSubmit={submitHandler} className="row-span-2">
             <label id="errLbl"></label>
             <label className="block my-5">
               <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block font-medium text-slate-700 text-xl">
