@@ -7,24 +7,37 @@ import Skeleton from "react-loading-skeleton";
 function Goals() {
   const [goals, setGoals] = useState([]);
   const cookie = new Cookies();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchGoals = async () => {
-      try {
-        const response = await axios.get("http://127.0.0.1:8000/api/goals", {
-          headers: {
-            Accept: "application/json",
-            Authorization: "Bearer " + cookie.get("jwt"),
-          },
-        });
-        setGoals(response.data.goals);
-      } catch (error) {
-        console.log(error.response); // This should be 401 if unauthorized
-      }
-    };
-
-    fetchGoals();
+    setTimeout(() => {
+      const fetchGoals = async () => {
+        try {
+          const response = await axios.get("http://127.0.0.1:8000/api/goals", {
+            headers: {
+              Accept: "application/json",
+              Authorization: "Bearer " + cookie.get("jwt"),
+            },
+          });
+          setGoals(response.data.goals);
+          setLoading(false);
+        } catch (error) {
+          console.log(error.response);
+        }
+      };
+      fetchGoals();
+    }, 1500);
   }, []);
+
+  const loadingHandle = () => {
+    return (
+      <>
+        <p>
+          <Skeleton count={3} />
+        </p>
+      </>
+    );
+  };
 
   return (
     <div className="flex flex-col gap-4">
@@ -40,14 +53,16 @@ function Goals() {
         </div>
       </div>
       <div className="body flex flex-col border-r border-b shadow-lg p-6 gap-6">
-        {goals.length !== 0 ? (
-          goals.map((goal) => <GoalRow key={goal.id} goal={goal} />)
+        {loading ? (
+          loadingHandle()
+        ) : goals.length === 0 ? (
+          <p className="text-center">
+            Looks like you don't have any goals yet!
+          </p>
         ) : (
-          <>
-            <p>
-              <Skeleton count={3} />
-            </p>
-          </>
+          goals.map((goal) => {
+            return <GoalRow key={goal.id} goal={goal} />;
+          })
         )}
       </div>
     </div>

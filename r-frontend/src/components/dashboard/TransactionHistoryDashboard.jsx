@@ -4,38 +4,56 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import Skeleton from "react-loading-skeleton";
 
-const groupByDate = (transaction) => {
-  return transaction.reduce((acc, item) => {
-    if (acc[item.tDate]) {
-      acc[item.tDate].push(item);
-    } else {
-      acc[item.tDate] = [item];
-    }
-    return acc;
-  }, []);
-};
-
 function TransactionHistoryDashboard() {
   const [transaction, settransaction] = useState([]);
+  const [loading, setLoading] = useState(true);
   const cookie = new Cookies();
 
+  const groupByDate = (transaction) => {
+    return transaction.reduce((acc, item) => {
+      if (acc[item.tDate]) {
+        acc[item.tDate].push(item);
+      } else {
+        acc[item.tDate] = [item];
+      }
+      return acc;
+    }, []);
+  };
+
+  const loadingHandle = () => {
+    return (
+      <>
+        <p>
+          <Skeleton count={3} />
+        </p>
+      </>
+    );
+  };
+
   useEffect(() => {
-    const getAllTransactions = async () => {
-      const response = await axios.get(
-        "http://127.0.0.1:8000/api/transaction",
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: "Bearer " + cookie.get("jwt"),
-          },
+    setTimeout(() => {
+      const getAllTransactions = async () => {
+        try {
+          const response = await axios.get(
+            "http://127.0.0.1:8000/api/transaction",
+            {
+              withCredentials: true,
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: "Bearer " + cookie.get("jwt"),
+              },
+            }
+          );
+          setLoading(false);
+          const data = await response.data;
+          settransaction(data.transaction);
+        } catch (error) {
+          console.log(error.response);
         }
-      );
-      const data = await response.data;
-      settransaction(data.transaction);
-    };
-    getAllTransactions();
+      };
+      getAllTransactions();
+    }, 1500);
   }, []);
 
   const formatedTransaction = groupByDate(transaction);
@@ -55,9 +73,10 @@ function TransactionHistoryDashboard() {
           </div>
         </div>
         <div className="body flex flex-col gap-8">
-          {transaction.length !== 0 ? (
+          {loading ? (
+            loadingHandle()
+          ) : transaction.length !== 0 ? (
             Object.keys(formatedTransaction).map((tDate, index) => {
-              console.log(formatedTransaction);
               return (
                 <TransactionDetailDashboard
                   key={tDate}
@@ -67,14 +86,11 @@ function TransactionHistoryDashboard() {
               );
             })
           ) : (
-            // <></>
-            <>
-              <div className="body flex flex-col border-r border-b shadow-lg p-6 gap-6">
-                <p>
-                  <Skeleton count={3} />
-                </p>
-              </div>
-            </>
+            <div className="body flex flex-col border-r border-b shadow-lg p-6 gap-6">
+              <p className="text-center">
+                Looks like you don't have any transactions yet!
+              </p>
+            </div>
           )}
         </div>
       </div>

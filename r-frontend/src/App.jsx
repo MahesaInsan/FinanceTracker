@@ -16,7 +16,8 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 function App() {
   return (
-    <SkeletonTheme baseColor="#F1F2F3" highlightColor="#FFFFFF">
+    // <SkeletonTheme baseColor="#F1F2F3" highlightColor="#FFFFFF">
+    <SkeletonTheme baseColor="#E0E0E0" highlightColor="#F0F0F0">
       <BrowserRouter>
         <div className="app h-screen">
           <Routes>

@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class AppController extends Controller
 {
@@ -27,13 +29,22 @@ class AppController extends Controller
 
     public function register(Request $request)
     {
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $path = 'public/images/user/';
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+                $file->storeAs($path, $filename);
+            }
+
             User::create([
+                'image' => $filename,
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
                 'password' => Hash::make($request->input('password'))
             ]);
 
             return response()->json([
+                'loc' => $path,
                 'message' => 'User created successfully'
             ], Response::HTTP_ACCEPTED);
     }

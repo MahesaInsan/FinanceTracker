@@ -13,20 +13,8 @@ const ProfileButton = (user) => {
 
   const logoutHandler = async (e) => {
     // e.preventDefault();
-    console.log("hello???");
     try {
-      // ! unauthorized when using the axios method
-      // const response = await axios.post("http://127.0.0.1:8000/api/logout", {
-      //   withCredentials: true,
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     Accept: "application/json",
-      //     Authorization: "Bearer " + cookie.get("jwt"),
-      //   },
-      // });
-      // console.log("response: ", response);
-      console.log("logout ...");
-      const test = await fetch("http://127.0.0.1:8000/api/logout", {
+      await fetch("http://127.0.0.1:8000/api/logout", {
         method: "POST",
         withCredentials: true,
         headers: {
@@ -36,8 +24,6 @@ const ProfileButton = (user) => {
         },
       });
       cookie.remove("jwt");
-      // cookie.remove("name");
-      // navigate("/login");
     } catch (error) {
       console.log(error);
     }
@@ -51,7 +37,7 @@ const ProfileButton = (user) => {
             <div className="shrink-0">
               <img
                 className="h-8 w-8 object-cover rounded-full"
-                src="#"
+                src={"http://localhost:8000/storage/images/" + user.image}
                 alt="Current profile photo"
               />
             </div>
