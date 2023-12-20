@@ -27,15 +27,15 @@ function TransactionDetailDashboard({ data, tDate }) {
   }, []);
 
   return (
-    <div className="flex flex-row w-full justify-between border-r border-b shadow-md rounded-lg p-6 px-16">
-      <div className="flex flex-col w-1/2 justify-center align-center text-xl gap-4">
+    <div className="flex flex-col gap-4 lg:gap-x-0 lg:flex-row w-full justify-between border-r border-b shadow-md rounded-lg p-6 px-6 md:px-10 lg:px-16">
+      <div className="flex flex-col md:flex-row lg:flex-col lg:w-1/2 justify-between lg:justify-center align-center text-xl gap-2 md:gap-4">
         <div>
           <p>{day},</p>
           {/* <p>Thursday,</p> */}
           <p className="font-bold">{date}</p>
           {/* <p className="font-bold">23 Desenver 2023</p> */}
         </div>
-        <div className="flex flex-row gap-16">
+        <div className="flex flex-col md:flex-row gap-2 md:gap-5 lg:gap-16">
           <div>
             <p>Income</p>
             <p className="font-semibold">{rupiah(income)}</p>
@@ -46,7 +46,7 @@ function TransactionDetailDashboard({ data, tDate }) {
           </div>
         </div>
       </div>
-      <div className="w-1/2 flex flex-col gap-4">
+      <div className="lg:w-1/2 flex flex-col gap-4">
         {formatedTransaction[tDate].map((data) => {
           return (
             <>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import goalImg from "/goal/goal.png";
 import axios from "axios";
 import Cookies from "universal-cookie";
 
@@ -54,7 +53,8 @@ function AddGoal({ cards }) {
             type="text"
             name="text"
             className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
-            placeholder="Goal Name ..."
+            placeholder="Goal Name..."
+            required
             onChange={(e) => setName(e.target.value)}
           />
         </label>
@@ -69,6 +69,7 @@ function AddGoal({ cards }) {
               type="date"
               className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
               placeholder="dd/mm/yyyy"
+              required
               onChange={(e) => setStartDate(e.target.value)}
             />
           </label>
@@ -82,6 +83,7 @@ function AddGoal({ cards }) {
               type="date"
               className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
               placeholder="dd/mm/yyyy"
+              required
               onChange={(e) => setEndDate(e.target.value)}
             />
           </label>
@@ -95,6 +97,7 @@ function AddGoal({ cards }) {
             name="number"
             className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
             placeholder="10000"
+            required
             onChange={(e) => setAmount(e.target.value)}
           />
         </label>
@@ -123,6 +126,7 @@ function AddGoal({ cards }) {
             rows="4"
             className="w-full px-3 py-2 bg-white  border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md sm:text-sm focus:ring-1"
             placeholder="Write your thoughts here..."
+            required
             onChange={(e) => setNote(e.target.value)}
           ></textarea>
         </label>

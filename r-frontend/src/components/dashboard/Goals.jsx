@@ -28,16 +28,16 @@ function Goals() {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="head flex flex-row justify-between">
+      <div className="head flex flex-col md:flex-row justify-between gap-4 md:gap-0">
         <div className="left">
           <h1 className="text-2xl font-semibold">My Goals</h1>
           <p>Add some goals that you want to achieve with your finances</p>
         </div>
-        <div className="grow flex justify-end">
-          <button className="p-2 border-2 rounded-xl text-medium border-[#3A89A0] text-[#3A89A0] w-[16rem] font-medium hover:bg-[#3A89A0] hover:text-white">
+        {/* <div className="grow flex justify-end">
+          <button className="p-2 border-2 rounded-xl text-medium border-[#3A89A0] text-[#3A89A0] w-full md:w-[10rem] lg:w-[16rem] font-medium hover:bg-[#3A89A0] hover:text-white">
             View All Goals
           </button>
-        </div>
+        </div> */}
       </div>
       <div className="body flex flex-col border-r border-b shadow-lg p-6 gap-6">
         {goals.length !== 0 ? (

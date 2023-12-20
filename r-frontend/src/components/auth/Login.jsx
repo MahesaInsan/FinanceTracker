@@ -73,7 +73,7 @@ const Login = () => {
   return (
     <>
       <div className="container mx-auto p-5 flex justify-center items-center h-screen">
-        <div className="grid grid-cols-2 gap-x-20 pl-[15%] pr-[15%]">
+        <div className="grid grid-rows-2 w-full lg:w-auto lg:grid-cols-2 lg:grid-rows-1 gap-x-20 px-[15%]">
           <div className="flex justify-center items-center">
             <h1 className="text-5xl font-semibold leading-tight">
               <span className="text-secondaryColor">Login</span> <br /> Page

@@ -13,9 +13,12 @@ export default function Tops() {
               <img src={welomeimg} className='w-[30rem]'></img>
             </div>
 
-            <div className='flex flex-col text-center'>
+            <div className='hidden md:flex flex-col text-center'>
               <p>{`It's`} a wonderful thing if we can set aside some of our money to</p>
               <p>achieve what we want.</p>
+            </div>
+            <div className='md:hidden text-center p-4'>
+               <p>{`It's`} a wonderful thing if we can set aside some of our money to achieve what we want.</p>
             </div>
 
             <div className='flex bg-[#2D4D5D] rounded-xl h-[3.5rem] w-[5rem] align-middle items-center justify-center'>

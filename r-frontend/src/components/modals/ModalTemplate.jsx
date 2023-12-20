@@ -34,8 +34,7 @@ const ModalTemplate = ({ setOpenModal }) => {
 
   return (
     <div className="modalBackground h-screen w-screen flex justify-center items-center">
-      <span className="modalContainer bg-white
-       w-[50%] p-8 rounded-xl">
+      <span className="modalContainer bg-white w-[90%] md:w-[75%] lg:w-[50%] p-8 rounded-xl">
         <div className="w-full flex justify-end">
           <button onClick={() => setOpenModal(false)}>X</button>
         </div>

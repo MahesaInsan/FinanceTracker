@@ -43,11 +43,11 @@ const Statistic = () => {
           <h1 className='text-2xl font-semibold'>Balance Statistic</h1>
           <p className='text-l'>Here is a visualization of the amount of expenses and income that exist in the period of this month, {date} {year}</p>
       </div>
-      <div className='Graph flex flex-row justify-between'>
-        <div className='w-[60%] h-[75%]'>
+      <div className='Graph flex flex-col lg:flex-row justify-between'>
+        <div className='lg:w-[60%] lg:h-[75%]'>
           <img src={"/statistic/statisticExample.png"} alt=""/>
         </div>
-        <div className='flex flex-col gap-2 justify-evenly items-center grow'>
+        <div className='flex flex-col md:flex-row lg:flex-col gap-2 justify-evenly items-center grow'>
           <TotalMoneyBox title={"Current Money"} description={`Rp. ${numberWithCommas(total)}`} color={"text-xl font-semibold minw-[20%]"}></TotalMoneyBox>
           <TotalMoneyBox title={"Total Income"} description={`Rp. ${numberWithCommas(income)}`} color={"text-xl font-semibold text-[#62C668] minw-[20%]"}></TotalMoneyBox>
           <TotalMoneyBox title={"Total Expense"} description={`Rp. ${numberWithCommas(expense)}`} color={"text-xl font-semibold text-[#DF2424] minw-[20%]"}></TotalMoneyBox>

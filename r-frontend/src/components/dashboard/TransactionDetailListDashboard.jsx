@@ -3,7 +3,7 @@ import React from 'react'
 function TransactionDetailListDashboard({goalLogo, type, disc, color, price}) {
   return (
     <div className='flex flex-row border-b-2 pb-2 justify-between'>
-        <div className='flex flex-row gap-4'>
+        <div className='flex flex-row lg:gap-4'>
             <div className='flex items-center'>
                 <img src={goalLogo} alt="" className='h-[2.5rem]'/>
             </div>

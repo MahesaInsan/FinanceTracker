@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Students from "./views/Students";
 import Welcome from "./views/Welcome";
 import Dashboard from "./views/Dashboard";
 import Header from "./components/partial/Header";

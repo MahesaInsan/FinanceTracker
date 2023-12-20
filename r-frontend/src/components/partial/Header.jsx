@@ -16,7 +16,7 @@ const fetchUser = async () => {
   console.log("Your cookie : " + cookie);
   const user = await CallAPI({
     url: "http://127.0.0.1:8000/api/user",
-    withCredentials: true,
+    withCredentials: true,  
     ContentType: "application/json",
     Accept: "application/json",
     cookie: cookie,
@@ -60,26 +60,30 @@ const Header = () => {
 
   return (
     <>
-      <header className="flex flex-row justify-evenly py-5 bg-primaryColor text-white font-medium text-lg sticky top-0 mb-[4rem] h-[5rem] align-middle items-center">
+      <header className="flex flex-row justify-between px-4 lg:px-[15%] py-5 bg-primaryColor text-white font-medium text-lg sticky top-0 mb-[4rem] h-[5rem] align-middle items-center">
         <div className="flex">
           <Link className="p-3" to="/">
             FinancialTracker
           </Link>
         </div>
-        <div className="flex">
-          <Link
-            className="hover:text-secondaryColor hover:underline underline-offset-8 p-3"
-            to="/dashboard"
-          >
-            Home
-          </Link>
-          <Link
-            className="hover:text-secondaryColor hover:underline underline-offset-8 p-3"
-            to="/transaction"
-          >
-            Transaction
-          </Link>
-        </div>
+        {
+          user &&
+          <div className="hidden lg:flex">
+            
+            <Link
+              className="hover:text-secondaryColor hover:underline underline-offset-8 p-3"
+              to="/dashboard"
+            >
+              Home
+            </Link>
+            <Link
+              className="hover:text-secondaryColor hover:underline underline-offset-8 p-3"
+              to="/transaction"
+            >
+              Transaction
+            </Link>
+          </div>
+        }
         <div className="flex">
           <Link className="p-3" to="#">
             <i className="fi fi-br-plus"></i>
@@ -118,6 +122,36 @@ const Header = () => {
                 >
                   <Menu.Items className="absolute right-0 z-10 mt-3 w-56 ori gin-top-right rounded-md bg-[#2D4D5D] text-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div className="py-1">
+                      <Menu.Item className="lg:hidden">
+                        {({ active }) => (
+                          <a
+                            href="/dashboard"
+                            className={classNames(
+                              active
+                                ? "bg-white hover:text-[#2D4D5D]"
+                                : "bg-[#2D4D5D]",
+                              "block px-4 py-2 text-sm"
+                            )}
+                          >
+                            Dashboard
+                          </a>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item className="lg:hidden">
+                        {({ active }) => (
+                          <a
+                            href="/transaction"
+                            className={classNames(
+                              active
+                                ? "bg-white hover:text-[#2D4D5D]"
+                                : "bg-[#2D4D5D]",
+                              "block px-4 py-2 text-sm"
+                            )}
+                          >
+                            Transaction
+                          </a>
+                        )}
+                      </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
                           <a

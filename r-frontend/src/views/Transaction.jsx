@@ -6,10 +6,10 @@ import TransactionHistoryDashboard from "../components/dashboard/TransactionHist
 const Transaction = () => {
   return (
     <Layout>
-      <div className="flex flex-col gap-8 mx-[8rem] mb-12">
+      <div className="flex flex-col gap-12 md:gap-8 mx-[5%] lg:mx-[15%] mb-12">
         <div className="flex flex-col items-center">
           <h1 className="font-medium text-xl">Find Your Transaction History</h1>
-          <p>Add Some goals that you want to achieve with your finances!</p>
+          <p className="text-center">Add Some goals that you want to achieve with your finances!</p>
         </div>
         {/* <div className="flex justify-center gap-4">
           <button className="border rounded-lg p-2 px-4">Filter</button>
