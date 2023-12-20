@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import Cookies from 'universal-cookie';
 
 export default function LeftProfile() {
-    const [cards, setCards] = useState([]);
     const [incomeCount, setIncomeCount] = useState(0);
     const [outcomeCount, setOutcomeCount] = useState(0);
+    const [balanceCount, setBalanceCount] = useState(0);
     const [user, setUser] = useState({
         name: '',
         email: '',
@@ -15,32 +15,10 @@ export default function LeftProfile() {
     const cookie = new Cookies();
 
     useEffect(() => {
-        const fetchCards = async () => {
-            try {
-                const response = await axios.get(
-                    'http://127.0.0.1:8000/api/cards',
-                    {
-                        headers: {
-                            Accept: 'application/json',
-                            Authorization: 'Bearer ' + cookie.get('jwt')
-                        }
-                    }
-                );
-                console.log('card', response);
-                setCards(response.data.cards);
-            } catch (error) {
-                console.log(error.response);
-            }
-        };
-
-        fetchCards();
-    }, []);
-
-    useEffect(() => {
         const fetchIncomeOutcome = async () => {
             try {
                 const response = await axios.get(
-                    'http://127.0.0.1:8000/api/income',
+                    'http://127.0.0.1:8000/api/cards/total',
                     {
                         headers: {
                             Accept: 'application/json',
@@ -48,10 +26,13 @@ export default function LeftProfile() {
                         }
                     }
                 );
-                console.log('income', response);
-                const { income, outcome } = response.data;
-                setIncomeCount(income);
-                setOutcomeCount(outcome);
+                console.log('total', response);
+                console.log('totIncome', response);
+                console.log('totExpense', response);
+                const { total, totIncome, totExpense } = response.data;
+                setBalanceCount(total);
+                setIncomeCount(totIncome);
+                setOutcomeCount(totExpense);
             } catch (error) {
                 console.log(error.response);
             }
@@ -81,21 +62,17 @@ export default function LeftProfile() {
         fetchUser();
     }, []);
 
-    const totalBalance = cards.reduce((total, card) => {
-        return total + card.amount;
-    }, 0);
-
     return (
-        <div className='flex flex-col pt-6 pl-[4rem] w-[18rem] justify-center text-center gap-4 align-middle items-center'>
+        <div className='flex flex-col max-w-[15em] text-center gap-4 align-middle items-center overflow-hidden pb-[2rem]'>
             <img
                 src='/profiles/dummyphoto.png'
                 className='flex rounded-full'
             ></img>
-            <h1 className='font-semibold text-2xl'>{user.name}</h1>
+                <h1 className='font-semibold text-2xl whitespace-normal break-words'>{user.name}</h1>
             <div className='flex flex-col shadow-xl w-[12rem] h-[6rem] justify-center'>
                 <h1 className='pt-2 text-lg'>Current Money</h1>
                 <h1 className='pb-2 text-lg font-semibold'>
-                    Rp {totalBalance}
+                    Rp {balanceCount}
                 </h1>
             </div>
             <div className='flex flex-col shadow-xl w-[12rem] h-[6rem] justify-center'>
