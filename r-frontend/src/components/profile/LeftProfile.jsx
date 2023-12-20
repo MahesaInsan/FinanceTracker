@@ -108,6 +108,7 @@ export default function LeftProfile() {
 
   const loadingHandle = () => {
     return (
+<<<<<<< HEAD
       <>
         <div className="flex flex-col gap-y-5">
           <div className="block">
@@ -118,6 +119,32 @@ export default function LeftProfile() {
           <p>
             <Skeleton count={1} style={{ height: "24px" }} />
           </p>
+=======
+        <div className='flex flex-col max-w-[12rem] sm:max-w-[15em] text-center gap-4 align-middle items-center overflow-hidden pb-[2rem]'>
+            <img
+                src='/profiles/dummyphoto.png'
+                className='flex rounded-full'
+            ></img>
+                <h1 className='font-semibold text-2xl whitespace-normal break-words'>{user.name}</h1>
+            <div className='flex flex-col shadow-xl w-[12rem] h-[6rem] justify-center'>
+                <h1 className='pt-2 text-lg'>Current Money</h1>
+                <h1 className='pb-2 text-lg font-semibold'>
+                    Rp {balanceCount}
+                </h1>
+            </div>
+            <div className='flex flex-col shadow-xl w-[12rem] h-[6rem] justify-center'>
+                <h1 className='pt-2 text-lg'>Total money in</h1>
+                <h1 className='pb-2 text-lg font-semibold text-[#62C668]'>
+                    Rp {incomeCount}
+                </h1>
+            </div>
+            <div className='flex flex-col shadow-xl w-[12rem] h-[6rem] justify-center'>
+                <h1 className='pt-2 text-lg'>Total money out</h1>
+                <h1 className='pb-2 text-lg font-semibold text-[#DF2424]'>
+                    Rp {outcomeCount}
+                </h1>
+            </div>
+>>>>>>> 0bf9efdfb34dab88e78da8d26ac8857ed804686a
         </div>
       </>
     );

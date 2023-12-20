@@ -27,6 +27,8 @@ function TransactionDetailDashboard({ data, tDate }) {
           ? setExpense((prevExpense) => prevExpense + data.amount)
           : setIncome((prevIncome) => prevIncome + data.amount);
       });
+      setIncome(totalIncome);
+      setExpense(totalExpense);
     };
     fetchTotal();
   }, []);

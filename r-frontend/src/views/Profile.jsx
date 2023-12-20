@@ -11,10 +11,9 @@ export default function Profile() {
             <YourProfile />
             <EditProfile />
             <MostSpending />
-            <div className='mx-[8rem] my-[4rem]'>
+            <div className='mx-[2rem] my-[4rem] sm:mx-[8rem] sm:my-[4rem]'>
                 <Wallet />
             </div>
         </Layout>
     );
 }
- 

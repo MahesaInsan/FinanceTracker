@@ -156,10 +156,10 @@ export default function EditProfile() {
     };
 
     return (
-        <div className='flex flex-row justify-center pb-[2rem]'>
+        <div className='flex flex-col sm:flex-row justify-center items-center pb-[2rem]'>
             <LeftProfile />
 
-            <form className='flex flex-col pl-32 gap-4' onSubmit={handleUpdate}>
+            <form className='flex flex-col sm:pl-32 gap-4 justify-center items-center' onSubmit={handleUpdate}>
             {formDisabled ? (
                     <button
                         onClick={handleButtonClick}
@@ -172,13 +172,13 @@ export default function EditProfile() {
                     <div className='flex flex-row gap-[5rem]'>
                       <button
                         onClick={handleButtonClick}
-                        className='p-3 bg-primaryColor hover:bg-hoverSecondaryColor text-white rounded w-[50%]'
+                        className='p-3 bg-primaryColor hover:bg-hoverSecondaryColor text-white rounded sm:w-[15rem] w-[50%]'
                     >
                         Cancel
                     </button>
                         <button
                             type='submit'
-                            className='p-3 bg-primaryColor hover:bg-hoverSecondaryColor text-white rounded w-[50%]'
+                            className='p-3 bg-primaryColor hover:bg-hoverSecondaryColor text-white rounded sm:w-[15rem] w-[50%]'
                         >
                             Submit
                         </button>
@@ -186,7 +186,7 @@ export default function EditProfile() {
                 )}
                 <div className='flex flex-col gap-2'>
                     <h1 className='font-bold'>Full Name</h1>
-                    <div className='flex flex-row h-[3rem] w-[40rem] border-2 border-[#8CC7D4] rounded-lg items-center'>
+                    <div className='flex flex-row h-[3rem] sm:w-[40rem] w-[20rem] border-2 border-[#8CC7D4] rounded-lg items-center'>
                         <BsPerson className='pointer-events-none w-6 h-6 ml-3'></BsPerson>
                         <input
                             type='text'
@@ -203,7 +203,7 @@ export default function EditProfile() {
 
                 <div className='flex flex-col gap-2'>
                     <h1 className='font-bold'>Email</h1>
-                    <div className='flex flex-row h-[3rem] w-[40rem] border-2 border-[#8CC7D4] rounded-lg items-center'>
+                    <div className='flex flex-row h-[3rem] sm:w-[40rem] w-[20rem] border-2 border-[#8CC7D4] rounded-lg items-center'>
                         <AiOutlineMail className='pointer-events-none w-6 h-6 ml-3'></AiOutlineMail>
                         <input
                             type='text'
@@ -224,7 +224,7 @@ export default function EditProfile() {
 
                 <div className='flex flex-col gap-2'>
                     <h1 className='font-bold'>Password</h1>
-                    <div className='flex flex-row h-[3rem] w-[40rem] border-2 border-[#8CC7D4] rounded-lg items-center'>
+                    <div className='flex flex-row h-[3rem] sm:w-[40rem] w-[20rem] border-2 border-[#8CC7D4] rounded-lg items-center'>
                         <AiOutlineLock className='pointer-events-none w-6 h-6 ml-3'></AiOutlineLock>
                         <input
                             type='password'
@@ -239,7 +239,7 @@ export default function EditProfile() {
 
                 <div className='flex flex-col gap-2'>
                     <h1 className='font-bold'>Confirm password</h1>
-                    <div className='flex flex-row h-[3rem] w-[40rem] border-2 border-[#8CC7D4] rounded-lg items-center'>
+                    <div className='flex flex-row h-[3rem] sm:w-[40rem] w-[20rem] border-2 border-[#8CC7D4] rounded-lg items-center'>
                         <AiOutlineLock className='pointer-events-none w-6 h-6 ml-3'></AiOutlineLock>
                         <input
                             type='password'
@@ -259,7 +259,7 @@ export default function EditProfile() {
                     <h1 className='font-bold'>Bio</h1>
                     <textarea
                         rows='10'
-                        className='block p-2.5 w-full text-sm rounded-lg outline-none border-2 border-[#8CC7D4]'
+                        className='block p-2.5 sm:w-[40rem] w-[20rem] text-sm rounded-lg outline-none border-2 border-[#8CC7D4]'
                         placeholder='Your bio...'
                         value={user.bio}
                         onChange={handlBioChange}
