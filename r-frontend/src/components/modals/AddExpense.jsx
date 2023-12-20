@@ -61,7 +61,8 @@ const AddExpense = ({ cards, setOpenModal }) => {
     } catch (error) {
       console.log(error.response.data.message);
     }
-    /* window.location.reload(false) */
+    
+    window.location.reload(false)
   };
 
   return (

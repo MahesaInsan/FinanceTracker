@@ -20,6 +20,39 @@ class TransactionController extends Controller
     {
     }
 
+    public function removeTransaction(Request $request){
+        $user = $this->user->user();
+        
+        if($user){
+            //Nyari transaction yang di delete
+            $trans = Transaction::with('TransactionType')->where('id', $request->id)->get();
+
+            //Nyari card yang mau ditambah balancenya atau dikurangin
+            $card = Card::findOrFail($trans->card_id);
+
+            //Kalau transaction typenya expense ditambah
+            if($trans->transaction_type->type == 'Expense'){
+                $card->balance += $trans->amount;
+
+                //check transactionya buat goal ga
+                if($trans->goal_id != null){
+
+                    //kalau buat goal ya kita kurangin investednya di table goal
+                    $goal = Goal::findOrFail($trans->goal_id);
+                    $goal->invested -= $trans->amount;
+                    $goal->save();
+                }
+                $card->save();
+            }else{
+                //ini kalau income
+                $card->balance -= $trans->amount;
+                $card->save();
+            }
+            //tinggal delete
+            $trans->delete();
+        }
+    }
+
     public function setTransaction(Request $request)
     {
         $user = $this->user->user();
