@@ -35,11 +35,11 @@ export default function MostSpending() {
         fetchSpending();
     }, [])
   return (
-    <div className='flex flex-col justify-center items-center gap-8 pt-10 font-bold'>
+    <div className='flex flex-col justify-center items-center gap-8 pt-10 font-bold pb-10'>
         <div>
             <h1 className='text-xl'>Most Spending Transaction</h1>
         </div>
-        <div className='flex flex-row gap-8 text-center'>
+        <div className='flex flex-col sm:flex-row gap-8 text-center'>
             <div className='flex flex-col justify-center border shadow-lg w-[12rem] h-[6rem] gap-2 font-bold'>
                 <div className='flex flex-row justify-center items-center gap-2'>
                     <div className='max-w-[30px]'>

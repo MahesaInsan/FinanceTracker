@@ -63,7 +63,7 @@ export default function LeftProfile() {
     }, []);
 
     return (
-        <div className='flex flex-col max-w-[15em] text-center gap-4 align-middle items-center overflow-hidden pb-[2rem]'>
+        <div className='flex flex-col max-w-[12rem] sm:max-w-[15em] text-center gap-4 align-middle items-center overflow-hidden pb-[2rem]'>
             <img
                 src='/profiles/dummyphoto.png'
                 className='flex rounded-full'
