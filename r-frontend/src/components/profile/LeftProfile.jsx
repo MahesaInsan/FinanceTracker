@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import Cookies from "universal-cookie";
 import Skeleton from "react-loading-skeleton";
+import TotalMoneyBox from "../dashboard/TotalMoneyBox";
 
 export default function LeftProfile() {
   const [cards, setCards] = useState([]);
@@ -10,6 +11,8 @@ export default function LeftProfile() {
   const [balanceCount, setBalanceCount] = useState(0);
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(true);
+  const cookie = new Cookies();
+
   const [user, setUser] = useState({
     image: "",
     name: "",
@@ -17,7 +20,10 @@ export default function LeftProfile() {
     password: "",
     bio: "",
   });
-  const cookie = new Cookies();
+
+  function numberWithCommas(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
 
   useEffect(() => {
     const fetchCards = async () => {
@@ -103,12 +109,11 @@ export default function LeftProfile() {
         }
       };
       fetchUser();
-    }, 3000);
+    }, 1500);
   }, []);
 
   const loadingHandle = () => {
     return (
-<<<<<<< HEAD
       <>
         <div className="flex flex-col gap-y-5">
           <div className="block">
@@ -119,32 +124,6 @@ export default function LeftProfile() {
           <p>
             <Skeleton count={1} style={{ height: "24px" }} />
           </p>
-=======
-        <div className='flex flex-col max-w-[12rem] sm:max-w-[15em] text-center gap-4 align-middle items-center overflow-hidden pb-[2rem]'>
-            <img
-                src='/profiles/dummyphoto.png'
-                className='flex rounded-full'
-            ></img>
-                <h1 className='font-semibold text-2xl whitespace-normal break-words'>{user.name}</h1>
-            <div className='flex flex-col shadow-xl w-[12rem] h-[6rem] justify-center'>
-                <h1 className='pt-2 text-lg'>Current Money</h1>
-                <h1 className='pb-2 text-lg font-semibold'>
-                    Rp {balanceCount}
-                </h1>
-            </div>
-            <div className='flex flex-col shadow-xl w-[12rem] h-[6rem] justify-center'>
-                <h1 className='pt-2 text-lg'>Total money in</h1>
-                <h1 className='pb-2 text-lg font-semibold text-[#62C668]'>
-                    Rp {incomeCount}
-                </h1>
-            </div>
-            <div className='flex flex-col shadow-xl w-[12rem] h-[6rem] justify-center'>
-                <h1 className='pt-2 text-lg'>Total money out</h1>
-                <h1 className='pb-2 text-lg font-semibold text-[#DF2424]'>
-                    Rp {outcomeCount}
-                </h1>
-            </div>
->>>>>>> 0bf9efdfb34dab88e78da8d26ac8857ed804686a
         </div>
       </>
     );
@@ -154,12 +133,18 @@ export default function LeftProfile() {
     return total + card.amount;
   }, 0);
 
+  const imageHandler = () => {
+    return user.image
+      ? "http://localhost:8000/storage/images/" + user.image
+      : "/profiles/dummyphoto.png";
+  };
+
   return (
     <div className="flex flex-col max-w-[15em] text-center gap-4 align-middle items-center overflow-hidden pb-[2rem]">
       {loading ? (
         <div
           className="flex flex-col gap-y-3"
-          style={{ width: "250px", height: "325px" }}
+          style={{ width: "250px", height: "325px", zIndex: -1 }}
         >
           <div className="block">
             <p>
@@ -175,7 +160,7 @@ export default function LeftProfile() {
         <>
           <div className="block">
             <img
-              src={"http://localhost:8000/storage/images/" + user.image}
+              src={imageHandler()}
               alt="profile-image"
               className="flex rounded-full"
               style={{ width: "250px", height: "250px" }}
@@ -187,20 +172,35 @@ export default function LeftProfile() {
         </>
       )}
       <div className="flex flex-col shadow-xl w-[12rem] h-[6rem] justify-center">
-        <h1 className="pt-2 text-lg">Current Money</h1>
-        <h1 className="pb-2 text-lg font-semibold">Rp {balanceCount}</h1>
+        {/* <h1 className="pt-2 text-lg">Current Money</h1> */}
+        {/* <h1 className="pb-2 text-lg font-semibold">Rp {balanceCount}</h1> */}
+        <TotalMoneyBox
+          title={"Current Money"}
+          description={`Rp. ${numberWithCommas(balanceCount)}`}
+          color={"text-xl font-semibold minw-[20%]"}
+        ></TotalMoneyBox>
       </div>
       <div className="flex flex-col shadow-xl w-[12rem] h-[6rem] justify-center">
-        <h1 className="pt-2 text-lg">Total money in</h1>
+        {/* <h1 className="pt-2 text-lg">Total money in</h1>
         <h1 className="pb-2 text-lg font-semibold text-[#62C668]">
           Rp {incomeCount}
-        </h1>
+        </h1> */}
+        <TotalMoneyBox
+          title={"Total Income"}
+          description={`Rp. ${numberWithCommas(incomeCount)}`}
+          color={"text-xl font-semibold text-[#62C668] minw-[20%]"}
+        ></TotalMoneyBox>
       </div>
       <div className="flex flex-col shadow-xl w-[12rem] h-[6rem] justify-center">
-        <h1 className="pt-2 text-lg">Total money out</h1>
+        {/* <h1 className="pt-2 text-lg">Total money out</h1>
         <h1 className="pb-2 text-lg font-semibold text-[#DF2424]">
           Rp {outcomeCount}
-        </h1>
+        </h1> */}
+        <TotalMoneyBox
+          title={"Total Expense"}
+          description={`Rp. ${numberWithCommas(outcomeCount)}`}
+          color={"text-xl font-semibold text-[#DF2424] minw-[20%]"}
+        ></TotalMoneyBox>
       </div>
     </div>
   );

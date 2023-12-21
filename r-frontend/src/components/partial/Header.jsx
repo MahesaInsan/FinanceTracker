@@ -53,7 +53,7 @@ const Header = () => {
       <>
         <SkeletonTheme baseColor="#4A6A7A" highlightColor="#3B5969">
           <p>
-            <Skeleton count={2} style={{ zIndex: 11 }} />
+            <Skeleton count={1} style={{ zIndex: 10 }} />
           </p>
         </SkeletonTheme>
       </>

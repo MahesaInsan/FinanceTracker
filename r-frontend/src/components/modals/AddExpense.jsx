@@ -28,10 +28,7 @@ const AddExpense = ({ cards, setOpenModal }) => {
         setExpense(response.data.expenseType);
         setType(response.data.expenseType[0].id);
         setAccount(cards[0].id);
-        console.log(cards);
-        console.log("expense : ", expense);
       } catch (error) {
-        console.log("failed");
         console.log(error.response);
       }
     };
@@ -60,7 +57,6 @@ const AddExpense = ({ cards, setOpenModal }) => {
           },
         }
       );
-      console.log(date, amount, account, note, type);
     } catch (error) {
       console.log(error.response.data.message);
     }
