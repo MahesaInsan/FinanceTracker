@@ -1,5 +1,6 @@
 import React from 'react';
 import welomeimg from '/welcome-money.png'
+import { Link } from 'react-router-dom';
 
 export default function Tops() {
     return (
@@ -21,11 +22,13 @@ export default function Tops() {
                <p>{`It's`} a wonderful thing if we can set aside some of our money to achieve what we want.</p>
             </div>
 
+            <Link to="/login">
             <div className='flex bg-[#2D4D5D] rounded-xl h-[3.5rem] w-[5rem] align-middle items-center justify-center'>
               <button className=' text-white '>
                 Join Us
               </button>
             </div>
+            </Link>
         </div>
     );
 }
