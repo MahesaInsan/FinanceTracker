@@ -14,7 +14,10 @@ Techstack used : ReactJS, Laravel and MySQL. <br /> <br />
 
 Turn on apache and MySQL on xampp
 
-Don't forget to config the database on .env <br /> <br />
+Don't forget to config the database on .env <br /> 
+on .env, replace the SANCTUM_STATEFUL_DOMAINS and SESSION_DOMAIN to <br /> 
+SANCTUM_STATEFUL_DOMAINS=127.0.0.1:8000 <br /> 
+SESSION_DOMAIN=127.0.0.1:8000 <br /> <br /> 
 
 Open 2 terminal 
 
