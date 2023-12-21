@@ -1,34 +1,34 @@
-# To Do
+# Final Project Web Programming - COMP6821001 - LE01
 
-## Front End
+##Finance Tracker Web App 
 
-### Transaction History
+Mahesa Insan Raushanfikir - 2501981024 as Fullstack Developer
+Dimas Dani Zaini - 2502021872 as Fullstack Developer
+Kenrick Panca Dewanto - 2501986422 as Fullstack Developer 
 
--   [x] Resize expence, income, and goal modal (make it smaller)
--   [x] Delete ilustration on **expence**, income, and goal modal
--   [ ] Redirect a user to "Transaction" (in navbar) when clicking the "View All Transaction History" Button
--   [ ] Integrate current income and expence with graph
--   [ ] Make a modal for "See Detail" button in each transaction of transaction history (also make it editable)
--   [ ] Add dynamic icon for transaction in expence modal
--   [x] Make "You are awesome!" to dynamic (customize with the expence and income limit)
--   [ ] Hide some transaction in transaction history if it is too much
--   [x] Invested money for goal
--   [x] Add Transaction type (dropdown) (salary, bonus, food, transportation, daily) in modal
--   [ ] Pagination in transaction history section
+Techstack used : ReactJS, Laravel and MySQL.
 
-### Transaction
+How to run : 
+Turn on apache and MySQL on xampp
+Don't forget to config the database on .env
 
--   [x] Delete E-Money type (only use Card Type)
+Open 2 terminal 
+For the first terminal, 
+Make sure the folder is at xampp\htdocs\FinanceTracker> 
+composer install
+npm install --legacy-peer-deps
+php artisan migrate:fresh --seed
+php artisan optimize
+php artisan serve
 
-#### Profile
+No need to open the laravel localhost on browser because the laravel only works as the backend and API on this project !
 
--   [x] Make the form edit profie to disable first, and editable after clicking the edit button
--   [ ] Integrate profile picture in profile section with dropdown
--   [ ] Change the color of card (make the color more interesting)
--   [ ] Integrate the card name with bank name in bank name section
+For the second terminal
+Open r-frontend folder for the react frontend 
+xampp\htdocs\FinanceTracker> cd r-frontend
 
-## Back End
+Make sure the folder is at xampp\htdocs\FinanceTracker\r-frontend>
+npm install --legacy-peer-deps
+npm run dev
 
--   [ ] Integrate Current money, total income, total expence
--   [ ] Link photo to storage laravel
--   [ ] Add dynamic category name for transaction history
+Open the localhost at your browser!
