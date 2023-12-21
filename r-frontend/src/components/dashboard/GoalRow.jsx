@@ -59,7 +59,9 @@ function GoalRow({ goal }) {
         </div>
         <div className="flex flex-col items-end justify-center">
           <div className="font-semibold text-sm md:text-l">Created at</div>
-          <div className="text-sm md:text-l">{formatDate(goal.created_at)}</div>
+          <div className="text-sm md:text-l text-end lg:text-start">
+            {formatDate(goal.created_at)}
+          </div>
         </div>
       </div>
     </div>

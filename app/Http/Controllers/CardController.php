@@ -60,7 +60,7 @@ class CardController extends Controller
     public function getTotal(){
         $user = $this->user->user();
         $cards = Card::where('user_id', $user->id)->get();
-        $transaction = Transaction::with('TransactionType')->get();
+        $transaction = Transaction::with('TransactionType')->where('user_id', $user->id) ->get();
         $total = 0;
         $totIncome = 0;
         $totExpense = 0;
