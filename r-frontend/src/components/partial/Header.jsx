@@ -112,16 +112,13 @@ const Header = () => {
           </Link>
         </div>
         <div className="flex">
-          <div
-            className="flex justify-center items-center"
-            style={{ height: "65px" }}
-          >
+          <div className="flex justify-center items-center w-[150px] h-[65px] md:w-[250px]">
             {loading ? (
               loadingHandle()
             ) : user ? (
               <Menu as="div" className="relative inline-block text-left">
                 <div className="flex items-center space-x-6">
-                  <Menu.Button className="flex gap-x-4 bg-[#2D4D5D] rounded-xl h-[3.5rem]  align-middle items-center justify-center text-white">
+                  <Menu.Button className="flex md:gap-x-4 bg-[#2D4D5D] rounded-xl h-[3.5rem]  align-middle items-center justify-center text-white">
                     <img
                       className="h-8 w-8 object-cover rounded-full"
                       src={imageHandler()}
