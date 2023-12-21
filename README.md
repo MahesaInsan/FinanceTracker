@@ -8,6 +8,7 @@ Dimas Dani Zaini - 2502021872 as Fullstack Developer
 
 Kenrick Panca Dewanto - 2501986422 as Fullstack Developer 
 
+
 Techstack used : ReactJS, Laravel and MySQL.
 
 How to run : 
