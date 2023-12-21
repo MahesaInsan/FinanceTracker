@@ -6,16 +6,15 @@ Mahesa Insan Raushanfikir - 2501981024 as Fullstack Developer
 
 Dimas Dani Zaini - 2502021872 as Fullstack Developer
 
-Kenrick Panca Dewanto - 2501986422 as Fullstack Developer 
+Kenrick Panca Dewanto - 2501986422 as Fullstack Developer <br /> <br />
 
+Techstack used : ReactJS, Laravel and MySQL. <br /> <br />
 
-Techstack used : ReactJS, Laravel and MySQL.
-
-How to run : 
+### How to run : 
 
 Turn on apache and MySQL on xampp
 
-Don't forget to config the database on .env
+Don't forget to config the database on .env <br /> <br />
 
 Open 2 terminal 
 
@@ -33,7 +32,7 @@ php artisan optimize
 
 php artisan serve
 
-No need to open the laravel localhost on browser because the laravel only works as the backend and API on this project !
+No need to open the laravel localhost on browser because the laravel only works as the backend and API on this project ! <br /> <br />
 
 For the second terminal
 
