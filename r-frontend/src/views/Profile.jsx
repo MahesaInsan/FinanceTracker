@@ -4,10 +4,12 @@ import YourProfile from '../components/profile/YourProfile';
 import EditProfile from '../components/profile/EditProfile';
 import Wallet from '../components/transactionComponent/Wallet';
 import MostSpending from '../components/profile/MostSpending';
+import AddButton from '../components/layoutComponent/AddButton';
 
 export default function Profile() {
     return (
         <Layout>
+            <AddButton />
             <YourProfile />
             <EditProfile />
             <MostSpending />

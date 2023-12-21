@@ -2,10 +2,12 @@ import Layout from "../layouts/Layout";
 import Wallet from "../components/transactionComponent/Wallet";
 import TransactionFilter from "../components/transactionComponent/TransactionFilter";
 import TransactionHistoryDashboard from "../components/dashboard/TransactionHistoryDashboard";
+import AddButton from "../components/layoutComponent/AddButton";
 
 const Transaction = () => {
   return (
     <Layout>
+      <AddButton />
       <div className="flex flex-col gap-12 md:gap-8 mx-[5%] lg:mx-[15%] mb-12">
         <div className="flex flex-col items-center">
           <h1 className="font-medium text-xl">Find Your Transaction History</h1>

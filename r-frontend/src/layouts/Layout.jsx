@@ -32,7 +32,6 @@ export default function Layout({ children }) {
   return (
     <div>
       <Header />
-      {user && <AddButton />}
       <div>{children}</div>
       <Footer />
     </div>
