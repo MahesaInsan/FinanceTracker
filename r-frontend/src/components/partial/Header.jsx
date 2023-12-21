@@ -114,7 +114,7 @@ const Header = () => {
         <div className="flex">
           <div
             className="flex justify-center items-center"
-            style={{ width: "250px", height: "65px" }}
+            style={{ height: "65px" }}
           >
             {loading ? (
               loadingHandle()

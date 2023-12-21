@@ -22,10 +22,12 @@ function TransactionDetailDashboard({ data, tDate }) {
 
   useEffect(() => {
     const fetchTotal = async () => {
+      let totalIncome = 0;
+      let totalExpense = 0;
       formatedTransaction[tDate].map((data) => {
         data.transaction_type.type === "Expense"
-          ? setExpense((prevExpense) => prevExpense + data.amount)
-          : setIncome((prevIncome) => prevIncome + data.amount);
+          ? (totalExpense = totalExpense + data.amount)
+          : (totalIncome = totalIncome + data.amount);
       });
       setIncome(totalIncome);
       setExpense(totalExpense);
