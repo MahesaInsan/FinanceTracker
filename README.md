@@ -40,8 +40,8 @@ Open r-frontend folder for the react frontend
 
 xampp\htdocs\FinanceTracker> cd r-frontend
 
-Make sure the folder is at xampp\htdocs\FinanceTracker\r-frontend>
-npm install --legacy-peer-deps
-npm run dev
+Make sure the folder is at xampp\htdocs\FinanceTracker\r-frontend> <br />
+npm install --legacy-peer-deps<br />
+npm run dev <br />
 
 Open the localhost at your browser!
