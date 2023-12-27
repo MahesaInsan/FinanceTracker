@@ -27,7 +27,7 @@ export default function Layout({ children }) {
       const getUser = await fetchUser();
       setUser(getUser);
     })();
-  }, [user]);
+  }, []);
 
   return (
     <div>
